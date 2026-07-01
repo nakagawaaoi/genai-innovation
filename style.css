@@ -498,12 +498,13 @@ nav a:hover {
 
 /* フッター */
 footer {
-  background-color: var(--text-dark);
-  color: var(--bg-white);
+  background-color: var(--bg-white);
+  color: var(--text-dark);
   padding: 5rem 10% 3rem;
   position: relative;
   /* フッターは外枠フレームを隠さないように配置 */
   margin: 0 -12px -12px -12px;
+  border-top: 1px solid var(--border-color);
 }
 
 .footer-content {
@@ -516,15 +517,15 @@ footer {
 }
 
 .footer-content .logo-text {
-  color: var(--bg-white);
+  color: var(--text-dark);
 }
 
 .footer-copyright {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   font-size: 0.85rem;
   text-align: center;
   width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-color);
   padding-top: 2.5rem;
 }
 

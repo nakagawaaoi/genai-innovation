@@ -20,7 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ヘッダーのスクロールエフェクト
-const header = document.querySelector('header');
 window.addEventListener('scroll', () => {
-  header.classList.toggle('is-scrolled', window.scrollY > 50);
+  const header = document.querySelector('header');
+  if (window.scrollY > 50) {
+    header.style.padding = '1rem 5%';
+    header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+  } else {
+    header.style.padding = '1.5rem 5%';
+    header.style.boxShadow = 'none';
+  }
+});
+
+// コピーライトの年度を自動更新
+document.addEventListener('DOMContentLoaded', () => {
+  const copyrightYear = document.getElementById('copyright-year');
+  if (copyrightYear) {
+    copyrightYear.textContent = new Date().getFullYear();
+  }
 });

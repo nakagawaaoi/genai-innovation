@@ -19,6 +19,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// 同意チェックボックスによる送信ボタンの制御
+document.addEventListener('DOMContentLoaded', () => {
+  const agreeCheckbox = document.getElementById('agree');
+  const submitBtn = document.getElementById('submitBtn');
+
+  if (agreeCheckbox && submitBtn) {
+    agreeCheckbox.addEventListener('change', () => {
+      submitBtn.disabled = !agreeCheckbox.checked;
+    });
+  }
+});
+
 // お問い合わせフォームの送信イベント
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {

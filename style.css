@@ -493,11 +493,35 @@ nav a:hover {
   background: var(--bg-white);
 }
 
+.form-group-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.form-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--brand-green);
+}
+
 .btn-submit {
   width: 100%;
   border: none;
   cursor: pointer;
   padding: 1.1rem;
+}
+
+.btn-submit:disabled {
+  background: #e2e8f0 !important;
+  color: #94a3b8 !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
+  transform: none !important;
+  border-color: #e2e8f0 !important;
 }
 
 /* フッター */

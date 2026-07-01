@@ -175,7 +175,11 @@
           <label for="message">お問い合わせ内容</label>
           <textarea id="message" rows="5" class="form-control" placeholder="AI導入の相談、共同研究のご提案など、お気軽にお問い合わせください。" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-submit">送信する</button>
+        <div class="form-group-checkbox">
+          <input type="checkbox" id="agree" class="form-checkbox">
+          <label for="agree">個人情報の取り扱い及びポリシーに同意する（必須）</label>
+        </div>
+        <button type="submit" id="submitBtn" class="btn btn-primary btn-submit" disabled>送信する</button>
       </form>
     </div>
   </section>

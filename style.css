@@ -313,49 +313,117 @@ nav a:hover {
   letter-spacing: -0.5px;
 }
 
-/* MISSION セクション */
-.mission-content {
+/* MISSION & VISION & VALUE セクション */
+.mission-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mv-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.mv-card {
   background: var(--bg-white);
   border: 2px solid var(--text-dark);
-  padding: 4rem;
-  border-radius: 32px;
-  max-width: 1100px;
-  margin: 0 auto;
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
   box-shadow: var(--shadow-md);
   position: relative;
+  transition: transform 0.3s ease;
 }
 
-.mission-grid {
+.mv-card:hover {
+  transform: translateY(-5px);
+}
+
+.mv-label {
+  font-family: var(--font-en);
+  font-weight: 900;
+  color: var(--brand-green);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.mv-card h3 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.mv-card p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* VALUEセクションのスタイル */
+.value-section {
+  border-top: 1px solid var(--border-color);
+  padding-top: 3rem;
+}
+
+.values-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 4rem;
-  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
 }
 
-.mission-text h3 {
+.value-card {
+  background: var(--bg-white);
+  border: 2px solid var(--text-dark);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.value-card:hover {
+  border-color: var(--brand-green);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.value-number {
+  font-family: var(--font-en);
   font-size: 2rem;
   font-weight: 900;
-  margin-bottom: 1.5rem;
-  line-height: 1.35;
+  color: rgba(0, 195, 98, 0.2);
+  line-height: 1;
 }
 
-.mission-text p {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  margin-bottom: 1.5rem;
-  text-align: justify;
-}
-
-.mission-highlight-box {
-  background: rgba(0, 195, 98, 0.04);
-  border: 2px dashed var(--brand-green);
-  padding: 2rem;
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 1.15rem;
-  line-height: 1.6;
+.value-card-content h4 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-direction: column;
   color: var(--text-dark);
-  position: relative;
+}
+
+.value-card-content h4 .val-en {
+  font-family: var(--font-en);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--brand-green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.2rem;
+}
+
+.value-card-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 /* SERVICES セクション */

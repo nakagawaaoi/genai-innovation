@@ -109,7 +109,8 @@ nav a:hover {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   align-items: center;
-  padding: 0 10%;
+  /* 上に固定ヘッダー分の余白を確保し、見出しが長くなってもヘッダーの裏に潜り込まないようにする */
+  padding: 130px 10% 4rem;
   position: relative;
   background-color: var(--bg-white);
   gap: 4rem;

@@ -20,15 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ヘッダーのスクロールエフェクト
+// ※インラインstyleを直接書き換えるとモバイル用CSSと競合するため、クラスの付け外しで行う
+const siteHeader = document.querySelector('header');
 window.addEventListener('scroll', () => {
-  const header = document.querySelector('header');
-  if (window.scrollY > 50) {
-    header.style.padding = '1rem 5%';
-    header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
-  } else {
-    header.style.padding = '1.5rem 5%';
-    header.style.boxShadow = 'none';
-  }
+  siteHeader.classList.toggle('is-scrolled', window.scrollY > 50);
 });
 
 // コピーライトの年度を自動更新

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;600;800;900&display=swap');
+/* フォントはHTML側の<link>で読み込み（@importより高速なため） */
 
 :root {
   --bg-light: #f8fafc; /* クリーンなオフホワイト */
@@ -287,6 +287,8 @@ nav a:hover {
 .section {
   padding: 8rem 10% 6rem;
   position: relative;
+  /* 固定ヘッダーの高さぶん、アンカージャンプ位置を下げる */
+  scroll-margin-top: 90px;
 }
 
 .section-header {
@@ -558,8 +560,21 @@ nav a:hover {
   background: var(--bg-white);
   border: 2px solid var(--text-dark);
   border-radius: 32px;
-  padding: 4.5rem 3.5rem;
+  padding: 5rem 3rem;
   box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.contact-lead {
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.btn-cta {
+  display: inline-block;
+  padding: 1.1rem 3rem;
 }
 
 /* フッター */
@@ -586,6 +601,12 @@ footer {
   color: var(--text-dark);
 }
 
+/* 白背景フッターでも読める色にする（旧: 白の半透明で不可視だった） */
+.footer-tagline {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
 .footer-copyright {
   color: var(--text-muted);
   font-size: 0.85rem;
@@ -607,7 +628,7 @@ footer {
   transform: translateY(0);
 }
 
-/* レレスポンシブ */
+/* レスポンシブ */
 @media (max-width: 1024px) {
   .hero {
     grid-template-columns: 1fr;
@@ -640,11 +661,6 @@ footer {
   .hero-main-card {
     height: 380px;
   }
-  
-  .mvv-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -659,12 +675,19 @@ footer {
     padding: 1rem 5%;
   }
   
-  nav {
-    display: none;
+  /* ナビは消さずコンパクト表示にする（メニュー手段を残す） */
+  nav ul {
+    gap: 1.1rem;
   }
-  
+
+  nav a {
+    font-size: 0.72rem;
+    letter-spacing: 0;
+  }
+
   .section {
     padding: 6rem 5% 3rem;
+    scroll-margin-top: 75px;
   }
 
   .services-grid {
@@ -708,5 +731,52 @@ footer {
   
   .contact-container {
     padding: 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* ロゴは画像だけにしてナビの居場所を確保 */
+  header .logo-text {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 2.3rem;
+    letter-spacing: -0.5px;
+  }
+
+  .hero p {
+    font-size: 1.02rem;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .btn {
+    text-align: center;
+  }
+
+  /* 浮遊カードが画面外にはみ出さないようにする */
+  .floating-ui-card {
+    padding: 0.8rem;
+  }
+
+  .floating-ui-card-1 {
+    left: 0;
+  }
+
+  .floating-ui-card-2 {
+    right: 0;
+  }
+
+  .floating-info p {
+    display: none;
+  }
+
+  .section-title {
+    font-size: 2.1rem;
   }
 }

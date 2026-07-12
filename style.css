@@ -484,6 +484,17 @@ nav a:hover {
   line-height: 1.65;
 }
 
+/* 専門用語のやさしい補足（FDEの解説など） */
+.service-note {
+  display: block;
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px dashed var(--border-color);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
 /* COMPANY セクション */
 .company-container {
   max-width: 950px;

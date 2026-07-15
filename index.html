@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=3.5">
+  <link rel="stylesheet" href="style.css?v=3.6">
 
   <!-- 構造化データ（検索エンジン向け会社情報） -->
   <script type="application/ld+json">
@@ -68,6 +68,9 @@
 
   <!-- ヒーローセクション（エディトリアル＆コラージュ構成） -->
   <section class="hero">
+    <!-- 背景装飾（ドット格子＋ゆっくり漂う光） -->
+    <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-2" aria-hidden="true"></div>
     <div class="hero-content">
       <div class="hero-tag">AI for All Sectors</div>
       <h1>すべてのセクターに、<br><span class="marker-text">最新のAI</span>を。<br><span class="highlight-text">公共・法人・個人へ。</span></h1>
@@ -104,9 +107,28 @@
     </div>
   </section>
 
+  <!-- 流れるキーワードリボン（エディトリアル演出） -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>AX Consulting</span><span>・</span>
+      <span>GenAI Training</span><span>・</span>
+      <span>AI Solutions</span><span>・</span>
+      <span>Joint Research</span><span>・</span>
+      <span>Forward Deployed Engineer</span><span>・</span>
+      <span>Niigata → Japan</span><span>・</span>
+      <span>AX Consulting</span><span>・</span>
+      <span>GenAI Training</span><span>・</span>
+      <span>AI Solutions</span><span>・</span>
+      <span>Joint Research</span><span>・</span>
+      <span>Forward Deployed Engineer</span><span>・</span>
+      <span>Niigata → Japan</span><span>・</span>
+    </div>
+  </div>
+
   <!-- MISSION, VALUE & VISION セクション (縦並び構成) -->
   <section id="about" class="section reveal">
     <div class="section-header">
+      <span class="header-bg-text" aria-hidden="true">PHILOSOPHY</span>
       <span class="section-tag">MISSION, VALUE & VISION</span>
       <h2 class="section-title">私たちの理念</h2>
     </div>
@@ -167,6 +189,7 @@
   <!-- SERVICES セクション -->
   <section id="services" class="section reveal">
     <div class="section-header">
+      <span class="header-bg-text" aria-hidden="true">SERVICES</span>
       <span class="section-tag">SERVICES</span>
       <h2 class="section-title">事業内容</h2>
     </div>
@@ -213,6 +236,7 @@
   <!-- COMPANY セクション -->
   <section id="company" class="section reveal">
     <div class="section-header">
+      <span class="header-bg-text" aria-hidden="true">COMPANY</span>
       <span class="section-tag">COMPANY</span>
       <h2 class="section-title">会社概要</h2>
     </div>
@@ -254,6 +278,7 @@
   <!-- CONTACT セクション -->
   <section id="contact" class="section reveal">
     <div class="section-header">
+      <span class="header-bg-text" aria-hidden="true">CONTACT</span>
       <span class="section-tag">CONTACT</span>
       <h2 class="section-title">お問い合わせ</h2>
     </div>

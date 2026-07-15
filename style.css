@@ -97,6 +97,27 @@ nav a {
   transition: all 0.3s ease;
   font-weight: 700;
   letter-spacing: 0.5px;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* ホバーで下線が左から伸びる */
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--brand-green);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 nav a:hover {
@@ -114,6 +135,78 @@ nav a:hover {
   position: relative;
   background-color: var(--bg-white);
   gap: 4rem;
+  overflow: hidden; /* 背景装飾のはみ出しを隠す */
+}
+
+/* ヒーロー背景：うっすらドット格子 */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 90% 80% at 35% 45%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 35% 45%, black 0%, transparent 75%);
+  pointer-events: none;
+}
+
+/* ヒーロー背景：ゆっくり漂う光のブロブ */
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.hero-blob-1 {
+  width: 480px;
+  height: 480px;
+  background: rgba(0, 195, 98, 0.16);
+  top: -12%;
+  left: -8%;
+  animation: blobDrift 16s ease-in-out infinite alternate;
+}
+
+.hero-blob-2 {
+  width: 420px;
+  height: 420px;
+  background: rgba(255, 107, 53, 0.09);
+  bottom: -18%;
+  right: -6%;
+  animation: blobDrift 20s ease-in-out 2s infinite alternate-reverse;
+}
+
+@keyframes blobDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(60px, 40px) scale(1.15); }
+}
+
+/* ヒーロー登場アニメーション（ふわっと順番に） */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-tag        { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both; }
+.hero h1         { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+.hero-content p  { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both; }
+.btn-container   { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both; }
+
+@keyframes scaleFade {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.hero-visual { animation: scaleFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+
+/* ロゴがゆったり呼吸するように上下する */
+.hero-main-card img {
+  animation: heroBob 7s ease-in-out 1.8s infinite;
+}
+
+@keyframes heroBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
 }
 
 .hero-content {
@@ -148,11 +241,18 @@ nav a:hover {
   letter-spacing: -1px;
 }
 
-/* 蛍光ペン風のハイライト文字 */
+/* 蛍光ペン風のハイライト文字（左から右へスッと引かれる） */
 .hero h1 span.marker-text {
-  background: linear-gradient(transparent 60%, rgba(0, 195, 98, 0.2) 60%);
+  background: linear-gradient(transparent 60%, rgba(0, 195, 98, 0.25) 60%);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
   padding: 0 0.3rem;
   font-weight: 900;
+  animation: markerSweep 0.7s ease-out 1.05s forwards;
+}
+
+@keyframes markerSweep {
+  to { background-size: 100% 100%; }
 }
 
 .hero h1 span.highlight-text {
@@ -284,6 +384,42 @@ nav a:hover {
   50% { transform: translateY(-10px); }
 }
 
+/* 流れるキーワードリボン（マーキー） */
+.marquee {
+  overflow: hidden;
+  border-top: 2px solid var(--text-dark);
+  border-bottom: 2px solid var(--text-dark);
+  background: var(--bg-white);
+  padding: 1.1rem 0;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.marquee-track span {
+  font-family: var(--font-en);
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--brand-green);
+  white-space: nowrap;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  to { transform: translateX(-50%); }
+}
+
 /* セクション共通 */
 .section {
   padding: 8rem 10% 6rem;
@@ -297,6 +433,26 @@ nav a:hover {
   margin-bottom: 5rem;
   border-left: 6px solid var(--brand-green);
   padding-left: 1.5rem;
+  position: relative;
+}
+
+/* 見出し背景の大きなアウトライン透かし文字（エディトリアル演出） */
+.header-bg-text {
+  position: absolute;
+  top: -3.4rem;
+  left: -0.4rem;
+  font-family: var(--font-en);
+  font-weight: 900;
+  font-size: 7rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 195, 98, 0.18);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: -1;
 }
 
 .section-tag {
@@ -470,6 +626,7 @@ nav a:hover {
   border-color: var(--brand-green);
   color: var(--bg-white);
   box-shadow: 0 8px 20px rgba(0, 195, 98, 0.25);
+  transform: rotate(-8deg) scale(1.08);
 }
 
 .service-card h3 {
@@ -513,6 +670,11 @@ nav a:hover {
 
 .info-table tr {
   border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+}
+
+.info-table tr:hover {
+  background-color: rgba(0, 195, 98, 0.03);
 }
 
 .info-table tr:last-child {
@@ -640,6 +802,30 @@ footer {
   transform: translateY(0);
 }
 
+/* カード類はセクション表示後、1枚ずつ時間差で現れる（スタッガー） */
+.reveal:not(.active) .service-card,
+.reveal:not(.active) .mvv-block {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(28px); }
+}
+
+.reveal.active .service-card,
+.reveal.active .mvv-block {
+  animation: cardIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.reveal.active .service-card:nth-child(2) { animation-delay: 0.08s; }
+.reveal.active .service-card:nth-child(3) { animation-delay: 0.16s; }
+.reveal.active .service-card:nth-child(4) { animation-delay: 0.24s; }
+.reveal.active .service-card:nth-child(5) { animation-delay: 0.32s; }
+.reveal.active .service-card:nth-child(6) { animation-delay: 0.40s; }
+.reveal.active .mvv-block:nth-child(2)    { animation-delay: 0.15s; }
+.reveal.active .mvv-block:nth-child(3)    { animation-delay: 0.30s; }
+
 /* レスポンシブ */
 @media (max-width: 1024px) {
   .hero {
@@ -700,6 +886,25 @@ footer {
   .section {
     padding: 6rem 5% 3rem;
     scroll-margin-top: 75px;
+  }
+
+  .header-bg-text {
+    font-size: 3.4rem;
+    top: -1.6rem;
+  }
+
+  .marquee {
+    padding: 0.8rem 0;
+  }
+
+  .marquee-track span {
+    font-size: 1rem;
+  }
+
+  .hero-blob-1, .hero-blob-2 {
+    width: 300px;
+    height: 300px;
+    filter: blur(70px);
   }
 
   .services-grid {
@@ -790,5 +995,23 @@ footer {
 
   .section-title {
     font-size: 2.1rem;
+  }
+}
+
+/* アニメーションを減らす設定のユーザーには動きを止める（アクセシビリティ） */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
   }
 }

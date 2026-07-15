@@ -403,13 +403,17 @@ nav a:hover {
 
 .marquee-track span {
   font-family: var(--font-en);
-  font-weight: 900;
-  font-size: 1.35rem;
-  letter-spacing: 1px;
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1.2px var(--brand-green);
+  color: var(--text-dark);
   white-space: nowrap;
+}
+
+/* 区切りの「・」だけ緑のアクセントに */
+.marquee-track span:nth-child(even) {
+  color: var(--brand-green);
 }
 
 .marquee:hover .marquee-track {

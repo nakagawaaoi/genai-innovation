@@ -1019,3 +1019,204 @@ footer {
     flex-wrap: wrap;
   }
 }
+
+/* =========================================
+   LP（事業内容・料金プラン）用スタイル
+   ========================================= */
+.services-lp-body {
+  background-color: var(--bg-white);
+}
+
+.services-hero {
+  padding: 160px 10% 6rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-light);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.services-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.services-hero h1 {
+  font-size: 3.2rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.services-intro {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.services-details-section {
+  padding: 6rem 10%;
+  background-color: var(--bg-white);
+}
+
+.services-details-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.service-detail-card {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2.5rem;
+  padding: 3.5rem;
+  background: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  scroll-margin-top: 100px;
+}
+
+.service-detail-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-green);
+}
+
+.service-detail-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(0, 195, 98, 0.08);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+}
+
+.service-detail-body h2 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.service-detail-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+.service-price-box {
+  background: var(--bg-light);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--text-muted);
+}
+
+.highlight-card {
+  border: 2px solid var(--brand-green);
+  box-shadow: 0 10px 30px rgba(0, 195, 98, 0.1);
+}
+
+.highlight-price {
+  background: rgba(0, 195, 98, 0.05);
+  border-left-color: var(--brand-green);
+}
+
+.price-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.highlight-price .price-label {
+  color: var(--brand-green);
+}
+
+.price-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--text-dark);
+}
+
+.price-note {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.price-subtext {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.services-cta {
+  background: var(--brand-green);
+  padding: 6rem 10%;
+  text-align: center;
+  color: var(--bg-white);
+}
+
+.services-cta h2 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  color: var(--bg-white);
+}
+
+.services-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+}
+
+.btn-large {
+  font-size: 1.1rem;
+  padding: 1.2rem 3.5rem;
+  background: var(--bg-white);
+  color: var(--brand-green);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border: none;
+}
+
+.btn-large:hover {
+  background: var(--bg-light);
+  color: var(--brand-green);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.btn-back {
+  border-color: rgba(0,0,0,0.1);
+  font-size: 0.85rem;
+  padding: 0.6rem 1.2rem;
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 768px) {
+  .services-hero h1 {
+    font-size: 2.2rem;
+  }
+  .service-detail-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  .service-detail-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem;
+  }
+}

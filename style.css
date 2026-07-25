@@ -1239,3 +1239,162 @@ footer {
     font-size: 1.8rem;
   }
 }
+
+/* ========================================
+   FOUNDER'S STORY ページ（story.html）
+   ======================================== */
+.story-section {
+  padding: 6rem 5% 7rem;
+  background-color: var(--bg-light);
+}
+
+.story-container {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.story-block {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 2.5rem;
+  background: var(--bg-white);
+  border: 2px solid var(--text-dark);
+  border-radius: 28px;
+  padding: 3.5rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.story-block:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand-green);
+}
+
+.story-num {
+  font-family: var(--font-en);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--brand-green);
+  line-height: 1;
+  border-right: 1px solid var(--border-color);
+  padding-right: 1.5rem;
+}
+
+.story-mvv .story-num {
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+}
+
+.story-body h2 {
+  font-size: 1.9rem;
+  font-weight: 900;
+  line-height: 1.45;
+  margin-bottom: 1.8rem;
+  color: var(--text-dark);
+}
+
+.story-body p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
+}
+
+.story-body p:last-child {
+  margin-bottom: 0;
+}
+
+.story-body strong {
+  color: var(--text-dark);
+  font-weight: 800;
+}
+
+/* 想いを強調する引用ブロック */
+.story-quote {
+  background: rgba(0, 195, 98, 0.05);
+  border-left: 4px solid var(--brand-green);
+  border-radius: 0 14px 14px 0;
+  padding: 1.6rem 1.8rem;
+  margin: 1.8rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.85;
+  color: var(--text-dark);
+}
+
+.story-table {
+  margin-top: 1.5rem;
+}
+
+.story-table th {
+  width: 30%;
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.story-th-note {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+.story-footnote {
+  margin-top: 1.8rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border-color);
+  font-size: 0.95rem !important;
+}
+
+@media (max-width: 768px) {
+  .story-section {
+    padding: 4rem 5% 5rem;
+  }
+
+  .story-block {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    padding: 2.5rem 1.8rem;
+  }
+
+  .story-num {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding-right: 0;
+    padding-bottom: 1rem;
+    font-size: 2.4rem;
+  }
+
+  .story-body h2 {
+    font-size: 1.5rem;
+  }
+
+  .story-table th,
+  .story-table td {
+    display: block;
+    width: 100%;
+  }
+}
+
+/* VISIONからストーリーページへの導線 */
+.story-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.8rem;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--brand-green);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease, gap 0.3s ease;
+}
+
+.story-link:hover {
+  border-bottom-color: var(--brand-green);
+  gap: 0.9rem;
+}

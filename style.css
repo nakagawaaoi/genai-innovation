@@ -544,6 +544,12 @@ nav a:hover {
   color: var(--text-dark);
 }
 
+/* VISIONの核となる「評価」を強調する蛍光ペン */
+.vision-accent {
+  background: linear-gradient(transparent 58%, rgba(0, 195, 98, 0.28) 58%);
+  padding: 0 0.2rem;
+}
+
 .mvv-block-body p {
   color: var(--text-muted);
   font-size: 1.05rem;

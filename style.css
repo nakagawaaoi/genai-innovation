@@ -528,6 +528,14 @@ nav a:hover {
   letter-spacing: 2px;
 }
 
+/* 「いま → 目指す未来」の時間軸が伝わる日本語ラベル */
+.mvv-label-jp {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
 .mvv-block-body h3 {
   font-size: 1.8rem;
   font-weight: 900;
@@ -999,6 +1007,11 @@ footer {
 
   .section-title {
     font-size: 2.1rem;
+  }
+
+  /* 小さい画面ではヘッダーが詰まるため日本語ラベルは省略 */
+  .mvv-label-jp {
+    display: none;
   }
 }
 

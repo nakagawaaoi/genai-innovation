@@ -1398,3 +1398,8 @@ footer {
   border-bottom-color: var(--brand-green);
   gap: 0.9rem;
 }
+
+/* VISIONの2本柱への導入文 */
+.vision-lead {
+  margin-bottom: 1.8rem !important;
+}

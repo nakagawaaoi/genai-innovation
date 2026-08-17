@@ -389,8 +389,14 @@
 /* 768px 以下: 全部1列。アイコンと番号は横並びにして高さを節約 */
 @media (max-width: 1024px) {
   .services-hero {
-    grid-template-columns: minmax(0, 1fr) 300px;
+    grid-template-columns: minmax(0, 1fr) 320px;
     gap: var(--sp-3, 32px);
+  }
+  .services-toc {
+    padding: var(--sp-2, 16px) var(--sp-2, 16px) var(--sp-1, 8px);
+  }
+  .services-toc a {
+    font-size: 0.85rem;
   }
 }
 
@@ -515,4 +521,11 @@
   font-size: 0.8rem;
   line-height: 1.7;
   color: var(--ink-3, #94a3b8);
+}
+
+/* スマホ幅: CTA 見出しが「くださ／い。」で折れないよう少し小さく */
+@media (max-width: 480px) {
+  .services-cta h2 {
+    font-size: 1.25rem;
+  }
 }

@@ -694,6 +694,12 @@ nav a:hover {
   border-bottom-color: var(--green-dark);
 }
 
+/* 見出しは文節で折り返す（「コンサルティン／グ」のような1文字落ちを防ぐ） */
+.service-item h3 {
+  overflow-wrap: anywhere;
+  word-break: auto-phrase;
+}
+
 /* グリッド下の控えめな案内リンク */
 .services-more {
   margin-top: var(--sp-4);
@@ -704,6 +710,7 @@ nav a:hover {
 }
 
 .services-more a {
+  white-space: nowrap;
   color: var(--green-dark);
   font-weight: 700;
   text-decoration: none;
@@ -927,7 +934,7 @@ footer {
     gap: var(--sp-2);
   }
   nav a {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     letter-spacing: 0.06em;
   }
   .section {
@@ -951,15 +958,19 @@ footer {
     order: -1;
     padding: var(--sp-3) 0 96px;
   }
+  /* 波は下端に揃えて必ず数本入るように。キャプションは帯の外（左上）へ */
   .hero-visual::before {
-    height: 80px;
+    bottom: 0;
+    height: 110px;
+    background: var(--wave) center bottom / 130% auto no-repeat;
   }
   .hero-visual img {
     width: 150px;
   }
   .hero-visual::after {
     left: 5%;
-    bottom: var(--sp-2);
+    top: var(--sp-2);
+    bottom: auto;
   }
   .mvv-num-badge {
     font-size: 2rem;
@@ -1015,12 +1026,32 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .logo-text {
+  /* ヘッダーはロゴ画像だけ。フッターには会社名を残す */
+  header .logo-text {
     display: none;
+  }
+  footer .logo-text {
+    font-size: 0.9rem;
   }
   .btn {
     width: 100%;
     text-align: center;
+  }
+  /* 「公共・法人・個人へ。」が1行に収まる大きさに */
+  .hero h1 {
+    font-size: 2rem;
+  }
+  /* 強制改行をやめて自然に折り返す */
+  .contact-lead br {
+    display: none;
+  }
+  /* 番号付きの行は2行目を字下げ */
+  .info-table td {
+    text-indent: -1.4em;
+    padding-left: 1.4em;
+  }
+  .info-table td .founder-cell {
+    text-indent: 0;
   }
 }
 

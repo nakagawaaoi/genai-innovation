@@ -1,18 +1,29 @@
 /* フォントはHTML側の<link>で読み込み（@importより高速なため） */
 
+/* =========================================
+   デザイントークン
+   白基調・文字と余白で見せる。装飾は「細い線・数字・小さなラベル」だけ
+   ========================================= */
 :root {
-  --bg-light: #f8fafc; /* クリーンなオフホワイト */
-  --bg-white: #ffffff; /* 純白 */
-  --brand-green: #00C362; /* NEWT風の鮮やかなシグナルグリーン */
-  --accent-orange: #ff6b35; /* 視線を集めるアクセントオレンジ */
-  --text-dark: #0f172a; /* 深みのあるスレートブラック（文字用） */
-  --text-muted: #475569; /* 中間グレー（サブテキスト用） */
-  --border-color: rgba(0, 195, 98, 0.12);
-  --shadow-sm: 0 2px 8px rgba(0, 195, 98, 0.04);
-  --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 20px 40px rgba(0, 195, 98, 0.08);
+  --green: #00C362;          /* コーポレートグリーン（変更禁止） */
+  --green-dark: #00994D;     /* 文字として使う緑（コントラスト確保） */
+  --orange: #ff6b35;         /* 差し色。使う場所は1〜2箇所まで（CTAホバー等） */
+  --ink: #0f172a;            /* 本文黒 */
+  --ink-2: #475569;          /* サブテキスト */
+  --ink-3: #94a3b8;          /* キャプション・英字ラベル */
+  --line: #e2e8f0;           /* 罫線 */
+  --paper: #ffffff;
+  --paper-2: #f8fafc;        /* セクション交互背景に薄く使う程度 */
+  --paper-green: #ecf8f1;    /* 緑の薄い色面（ヒーロー右・アイコン下地） */
+  --green-deep: #0a4a31;     /* 深緑の帯（VISION・お問い合わせ）。白 → 薄緑 → 深緑 の3段階の最後 */
+  --ink-band: var(--green-deep); /* 旧名。services.css からも参照 */
+  /* ロゴ由来の波モチーフ（線画・緑）。背景としてごく薄く敷く */
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 320' fill='none' stroke='%2300C362' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M-20 60c90-40 170 40 260 0s170-40 260 0 170 40 260 0 120-30 160-10'/%3E%3Cpath d='M-20 100c90-40 170 40 260 0s170-40 260 0 170 40 260 0 120-30 160-10'/%3E%3Cpath d='M-20 140c90-40 170 40 260 0s170-40 260 0 170 40 260 0 120-30 160-10'/%3E%3Cpath d='M-20 180c90-40 170 40 260 0s170-40 260 0 170 40 260 0 120-30 160-10'/%3E%3Cpath d='M-20 220c90-40 170 40 260 0s170-40 260 0 170 40 260 0 120-30 160-10'/%3E%3Cpath d='M-20 260c90-40 170 40 260 0s170-40 260 0 170 40 260 0 120-30 160-10'/%3E%3C/svg%3E");
   --font-en: 'Outfit', sans-serif;
   --font-jp: 'Noto Sans JP', sans-serif;
+  --radius: 4px;             /* 角丸はこれ1種類。ボタンも同じ */
+  --max: 1280px;             /* コンテンツ幅（大画面で左右が余りすぎないよう広め） */
+  --sp-1: 8px; --sp-2: 16px; --sp-3: 32px; --sp-4: 64px; --sp-5: 120px; /* 余白は5段階だけ */
 }
 
 * {
@@ -26,1410 +37,1012 @@ html {
 }
 
 body {
-  background-color: var(--bg-light);
-  color: var(--text-dark);
+  background-color: var(--paper);
+  color: var(--ink);
   font-family: var(--font-jp);
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.9;
   overflow-x: hidden;
-  /* デザイナーがやった感を出すための外枠フレーム */
-  border: 12px solid var(--brand-green);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ナビゲーションバー */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =========================================
+   ヘッダー（白背景・下に1px罫線）
+   ========================================= */
 header {
   position: fixed;
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  padding: 1.2rem 5%;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  padding: 0 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  backdrop-filter: blur(20px);
-  background-color: rgba(255, 255, 255, 0.85);
-  border-bottom: 1px solid var(--border-color);
-  transition: padding 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
 }
 
+/* スクロール時（main.js が付け外し）。差はほぼ出さない */
 header.is-scrolled {
-  padding: 1rem 5%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.98);
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 10px;
   text-decoration: none;
+  color: var(--ink);
 }
 
 .logo-img {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  object-fit: cover;
-  border: 1px solid var(--border-color);
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .logo-text {
   font-family: var(--font-en);
-  font-weight: 900;
-  font-size: 1.3rem;
-  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
 }
 
 .logo-text span {
-  color: var(--brand-green);
+  color: var(--green-dark);
 }
 
 nav ul {
   display: flex;
   list-style: none;
-  gap: 2.5rem;
+  gap: var(--sp-3);
 }
 
 nav a {
-  color: var(--text-muted);
+  font-family: var(--font-en);
+  color: var(--ink-2);
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  position: relative;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   padding-bottom: 4px;
-}
-
-/* ホバーで下線が左から伸びる */
-nav a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--brand-green);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-nav a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 nav a:hover {
-  color: var(--brand-green);
+  color: var(--ink);
+  border-bottom-color: var(--green);
 }
 
-/* ヒーローセクション（エディトリアル風コラージュレイアウト） */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  align-items: center;
-  /* 上に固定ヘッダー分の余白を確保し、見出しが長くなってもヘッダーの裏に潜り込まないようにする */
-  padding: 130px 10% 4rem;
-  position: relative;
-  background-color: var(--bg-white);
-  gap: 4rem;
-  overflow: hidden; /* 背景装飾のはみ出しを隠す */
+/* =========================================
+   共通レイアウト
+   ========================================= */
+.section {
+  padding: var(--sp-5) 5%;
+  /* 固定ヘッダーの高さぶん、アンカージャンプ位置を下げる */
+  scroll-margin-top: 64px;
 }
 
-/* ヒーロー背景：うっすらドット格子 */
-.hero::before {
+/* 各セクションの中身は最大幅で中央寄せ */
+.section > * {
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-header {
+  margin-bottom: var(--sp-4);
+}
+
+/* 見出しの上に短い緑の罫線（セクションの目印） */
+.section-header::before {
   content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: radial-gradient(ellipse 90% 80% at 35% 45%, black 0%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 35% 45%, black 0%, transparent 75%);
-  pointer-events: none;
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--green);
+  margin-bottom: var(--sp-2);
 }
 
-/* ヒーロー背景：ゆっくり漂う光のブロブ */
-.hero-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  pointer-events: none;
-}
-
-.hero-blob-1 {
-  width: 480px;
-  height: 480px;
-  background: rgba(0, 195, 98, 0.16);
-  top: -12%;
-  left: -8%;
-  animation: blobDrift 16s ease-in-out infinite alternate;
-}
-
-.hero-blob-2 {
-  width: 420px;
-  height: 420px;
-  background: rgba(255, 107, 53, 0.09);
-  bottom: -18%;
-  right: -6%;
-  animation: blobDrift 20s ease-in-out 2s infinite alternate-reverse;
-}
-
-@keyframes blobDrift {
-  0%   { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(60px, 40px) scale(1.15); }
-}
-
-/* ヒーロー登場アニメーション（ふわっと順番に） */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(26px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.hero-tag        { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both; }
-.hero h1         { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
-.hero-content p  { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both; }
-.btn-container   { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both; }
-
-@keyframes scaleFade {
-  from { opacity: 0; transform: scale(0.92) translateY(20px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.hero-visual { animation: scaleFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
-
-/* ロゴがゆったり呼吸するように上下する */
-.hero-main-card img {
-  animation: heroBob 7s ease-in-out 1.8s infinite;
-}
-
-@keyframes heroBob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
-}
-
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  z-index: 2;
-  text-align: left;
-}
-
-.hero-tag {
+/* 英字ラベル（MISSION / SERVICES 等） */
+.section-tag {
   font-family: var(--font-en);
-  background: rgba(0, 195, 98, 0.08);
-  color: var(--brand-green);
-  padding: 0.5rem 1.2rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 800;
-  margin-bottom: 2rem;
-  letter-spacing: 1.5px;
+  color: var(--green-dark);
+  font-weight: 600;
   text-transform: uppercase;
-  border: 1px solid rgba(0, 195, 98, 0.2);
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  display: block;
+  margin-bottom: var(--sp-1);
 }
 
-/* 極太ゴシックとアウトライン文字を再現する見出し */
-.hero h1 {
-  font-size: 4rem;
-  font-weight: 900;
-  line-height: 1.15;
-  margin-bottom: 1.5rem;
-  color: var(--text-dark);
-  letter-spacing: -1px;
+.section-title {
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
 }
 
-/* 蛍光ペン風のハイライト文字（左から右へスッと引かれる） */
-.hero h1 span.marker-text {
-  background: linear-gradient(transparent 60%, rgba(0, 195, 98, 0.25) 60%);
-  background-repeat: no-repeat;
-  background-size: 0% 100%;
-  padding: 0 0.3rem;
-  font-weight: 900;
-  animation: markerSweep 0.7s ease-out 1.05s forwards;
+/* =========================================
+   ボタン（影なし・移動なし・色の transition のみ）
+   ========================================= */
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  font-family: var(--font-jp);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-@keyframes markerSweep {
-  to { background-size: 100% 100%; }
+.btn-primary {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: #fff;
 }
 
-.hero h1 span.highlight-text {
-  color: var(--brand-green);
+.btn-primary:hover {
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
+  color: #fff;
 }
 
-.hero p {
-  color: var(--text-muted);
-  font-size: 1.15rem;
-  max-width: 520px;
-  margin-bottom: 2.5rem;
-  font-weight: 500;
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  background-color: var(--ink);
+  color: #fff;
 }
 
 .btn-container {
   display: flex;
-  gap: 1.2rem;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
 }
 
-.btn {
-  padding: 0.9rem 2.2rem;
-  border-radius: 12px;
-  text-decoration: none;
+/* =========================================
+   ヒーロー
+   ========================================= */
+.hero {
+  /* 画面高いっぱいまでは伸ばしすぎない */
+  min-height: min(100vh, 820px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 44%);
+  align-items: stretch;
+  gap: var(--sp-4);
+  /* 固定ヘッダーぶん上を空ける。左は 5% か、コンテンツ幅 --max に収まる余白の広い方。右は色面を端まで伸ばすので 0 */
+  padding: 64px 0 0 max(5%, calc((100% - var(--max)) / 2));
+}
+
+.hero-content {
+  align-self: center;
+  padding: var(--sp-4) 0;
+}
+
+.hero-tag {
+  font-family: var(--font-en);
+  color: var(--ink-3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  margin-bottom: var(--sp-2);
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
   font-weight: 700;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  font-size: 0.95rem;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--sp-3);
 }
 
-.btn-primary {
-  background-color: var(--brand-green);
-  color: var(--bg-white);
-  box-shadow: 0 8px 24px rgba(0, 195, 98, 0.2);
+/* 2行目「最新のAI」は太字のまま（蛍光ペンは廃止） */
+.hero h1 .marker-text {
+  font-weight: 700;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  background-color: #00a854;
-  box-shadow: 0 12px 30px rgba(0, 195, 98, 0.35);
+/* 3行目は緑文字 */
+.hero h1 .highlight-text {
+  color: var(--green-dark);
 }
 
-.btn-secondary {
-  border: 2px solid var(--text-dark);
-  color: var(--text-dark);
-  background: transparent;
+.hero-content > p {
+  color: var(--ink-2);
+  max-width: 40em;
+  margin-bottom: var(--sp-3);
 }
 
-.btn-secondary:hover {
-  background: var(--text-dark);
-  color: var(--bg-white);
-  transform: translateY(-2px);
+/* 控えめな注釈（線1本＋小さいラベル） */
+.hero-notes {
+  list-style: none;
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
 }
 
-/* ヒーロー画像のコラージュ演出 */
+.hero-notes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--ink-2);
+}
+
+.hero-notes .icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--green-dark);
+}
+
+.hero-note-en {
+  display: block;
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.hero-note-jp {
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+/* 右側：緑の薄い色面を画面右端まで伸ばし、波の線画の上にロゴを大きく置く */
 .hero-visual {
   position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  height: 80%;
-}
-
-.hero-main-card {
-  width: 80%;
-  height: 400px;
-  background-color: transparent;
-  border-radius: 0;
+  background-color: var(--paper-green);
   overflow: hidden;
-  border: none;
-  box-shadow: none;
-  position: relative;
+  /* ロゴは上寄せ。下 34% は波モチーフ専用の帯にして、ロゴと絶対に重ねない */
+  padding-bottom: 34%;
 }
 
-.hero-main-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 浮遊するUIカードパーツの演出（デザイナー風） */
-.floating-ui-card {
+.hero-visual::before {
+  content: '';
   position: absolute;
-  background: var(--bg-white);
-  border: 2px solid var(--text-dark);
-  border-radius: 16px;
-  padding: 1.2rem;
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  z-index: 3;
-}
-
-.floating-ui-card-1 {
-  top: 15%;
-  left: -5%;
-  animation: float 6s ease-in-out infinite;
-}
-
-.floating-ui-card-2 {
-  bottom: 12%;
-  right: -5%;
-  animation: float 6s ease-in-out infinite 3s;
-}
-
-.floating-icon {
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 195, 98, 0.1);
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  color: var(--brand-green);
-}
-
-.floating-info h4 {
-  font-size: 0.85rem;
-  font-weight: 800;
-}
-
-.floating-info p {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* 流れるキーワードリボン（マーキー） */
-.marquee {
-  overflow: hidden;
-  border-top: 2px solid var(--text-dark);
-  border-bottom: 2px solid var(--text-dark);
-  background: var(--bg-white);
-  padding: 1.1rem 0;
-}
-
-.marquee-track {
-  display: flex;
-  align-items: center;
-  gap: 2.2rem;
-  width: max-content;
-  animation: marqueeScroll 28s linear infinite;
-}
-
-.marquee-track span {
-  font-family: var(--font-en);
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: var(--text-dark);
-  white-space: nowrap;
-}
-
-/* 区切りの「・」だけ緑のアクセントに */
-.marquee-track span:nth-child(even) {
-  color: var(--brand-green);
-}
-
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes marqueeScroll {
-  to { transform: translateX(-50%); }
-}
-
-/* セクション共通 */
-.section {
-  padding: 8rem 10% 6rem;
-  position: relative;
-  /* 固定ヘッダーの高さぶん、アンカージャンプ位置を下げる */
-  scroll-margin-top: 90px;
-}
-
-.section-header {
-  text-align: left;
-  margin-bottom: 5rem;
-  border-left: 6px solid var(--brand-green);
-  padding-left: 1.5rem;
-  position: relative;
-}
-
-/* 見出し背景の大きなアウトライン透かし文字（エディトリアル演出） */
-.header-bg-text {
-  position: absolute;
-  top: -3.4rem;
-  left: -0.4rem;
-  font-family: var(--font-en);
-  font-weight: 900;
-  font-size: 7rem;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 195, 98, 0.18);
+  left: -10%;
+  right: -10%;
+  bottom: -4%;
+  height: 30%;
+  background: var(--wave) center top / 120% auto no-repeat;
+  opacity: 0.55;
   pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-  z-index: -1;
 }
 
-.section-tag {
+.hero-visual img {
+  position: relative;
+  width: min(64%, 400px);
+  height: auto;
+}
+
+/* 色面の左下に、控えめな英字キャプション */
+.hero-visual::after {
+  content: 'Niigata, Japan';
+  position: absolute;
+  left: var(--sp-3);
+  bottom: var(--sp-3);
   font-family: var(--font-en);
-  color: var(--brand-green);
-  font-weight: 800;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.85rem;
-  display: block;
-  margin-bottom: 0.3rem;
+  color: var(--green-dark);
 }
 
-.section-title {
-  font-size: 2.8rem;
-  font-weight: 900;
-  letter-spacing: -0.5px;
-}
-
-/* MISSION & VISION & VALUE セクション (縦並び構成) */
+/* =========================================
+   理念（MISSION / VALUE / VISION）
+   左に細い列（番号・英字・日本語ラベル）、右に本文。ブロック間は罫線
+   ========================================= */
+/* 01 → 02 → 03 を色の濃さで「いま → 日々 → 未来」の流れとして見せる
+   01 白（罫線）→ 02 薄緑 → 03 濃紺。ブロック同士は短い縦線でつなぐ */
 .mvv-vertical-container {
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
-  max-width: 1100px;
-  margin: 0 auto;
 }
 
 .mvv-block {
+  position: relative;
   display: grid;
   grid-template-columns: 220px 1fr;
-  gap: 3rem;
-  background: var(--bg-white);
-  border: 2px solid var(--text-dark);
-  border-radius: 28px;
-  padding: 3.5rem;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  border-radius: var(--radius);
 }
 
-.mvv-block:hover {
-  transform: translateY(-3px);
-  border-color: var(--brand-green);
+/* ブロック間のつなぎ（縦の短い線） */
+.mvv-block + .mvv-block {
+  margin-top: var(--sp-4);
+}
+
+/* 線は「前のブロックの下」から生やす（03 は overflow:hidden なので上からは出せない） */
+.mvv-block:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--sp-4) + 18px); /* 番号の中心あたり */
+  bottom: calc(-1 * var(--sp-4));
+  height: var(--sp-4);
+  width: 1px;
+  background: var(--green);
+}
+
+/* 01 MISSION：白地に罫線 */
+.mission-block {
+  border: 1px solid var(--line);
+}
+
+/* 02 VALUE：薄緑 */
+.value-block {
+  background-color: var(--paper-green);
+}
+
+.value-block .mvv-num-badge {
+  color: var(--green-dark);
 }
 
 .mvv-block-header {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 0.8rem;
-  border-right: 1px solid var(--border-color);
-  padding-right: 2rem;
+  gap: 2px;
 }
 
+/* 番号は大きく薄く。視線のアンカーにする */
 .mvv-num-badge {
   font-family: var(--font-en);
-  font-size: 2.8rem;
-  font-weight: 900;
-  color: var(--brand-green);
+  font-weight: 400;
+  font-size: 3rem;
   line-height: 1;
+  color: var(--green);
+  margin-bottom: var(--sp-1);
 }
 
 .mvv-label-en {
   font-family: var(--font-en);
-  font-weight: 900;
-  font-size: 0.95rem;
-  color: var(--text-dark);
-  letter-spacing: 2px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
 }
 
-/* 「いま → 目指す未来」の時間軸が伝わる日本語ラベル */
 .mvv-label-jp {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.5px;
+  color: var(--ink);
+  margin-top: 4px;
+}
+
+.mvv-block-body {
+  max-width: 40em;
 }
 
 .mvv-block-body h3 {
-  font-size: 1.8rem;
-  font-weight: 900;
-  line-height: 1.45;
-  margin-bottom: 1.5rem;
-  color: var(--text-dark);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-bottom: var(--sp-2);
 }
 
-/* VISIONの核となる「評価」を強調する蛍光ペン */
+/* VISION の強調は緑文字のみ（蛍光ペンは廃止） */
 .vision-accent {
-  background: linear-gradient(transparent 58%, rgba(0, 195, 98, 0.28) 58%);
-  padding: 0 0.2rem;
+  color: var(--green-dark);
 }
 
 .mvv-block-body p {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  line-height: 1.8;
+  color: var(--ink-2);
 }
 
-/* VALUEリスト用の縦並びスタイル */
+/* VISION だけ濃紺の帯にして、理念の締めとして強く見せる */
+.vision-block {
+  background-color: var(--ink-band);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 帯の右下に波モチーフ */
+.vision-block::after {
+  content: '';
+  position: absolute;
+  right: -8%;
+  bottom: -10%;
+  width: 60%;
+  height: 60%;
+  background: var(--wave) right bottom / 100% auto no-repeat;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.vision-block > * {
+  position: relative;
+  z-index: 1;
+}
+
+.vision-block .mvv-num-badge {
+  color: #6EE7A8;
+}
+
+.vision-block .mvv-label-jp,
+.vision-block .mvv-block-body h3,
+.vision-block .value-vertical-item h4 {
+  color: #fff;
+}
+
+.vision-block .mvv-label-en,
+.vision-block .value-vertical-item h4 .val-en {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.vision-block .mvv-block-body p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.vision-block .value-vertical-item p strong {
+  color: #fff;
+}
+
+.vision-block .vision-accent {
+  color: #6EE7A8; /* 深緑地でも読める明るい緑 */
+}
+
+.vision-lead {
+  margin-bottom: var(--sp-2);
+}
+
+/* 下位項目（見出し＋本文の素朴なリスト） */
 .value-vertical-list {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-}
-
-.value-vertical-item {
-  border-bottom: 1px dashed var(--border-color);
-  padding-bottom: 2rem;
-}
-
-.value-vertical-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+  gap: var(--sp-3);
 }
 
 .value-vertical-item h4 {
-  font-size: 1.25rem;
-  font-weight: 900;
-  margin-bottom: 0.8rem;
-  color: var(--text-dark);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.6;
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  margin-bottom: var(--sp-1);
 }
 
+/* 英字キャプション：バッジではなく、見出しの下に小さく */
 .value-vertical-item h4 .val-en {
+  order: 1;
   font-family: var(--font-en);
+  font-weight: 600;
   font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--brand-green);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 1px solid rgba(0, 195, 98, 0.3);
-  padding: 0.1rem 0.6rem;
-  border-radius: 4px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  margin-top: 2px;
 }
 
-.value-vertical-item p {
-  color: var(--text-muted);
-  font-size: 1.02rem;
-  line-height: 1.7;
+.value-vertical-item p strong {
+  color: var(--ink);
+  font-weight: 700;
 }
 
-/* SERVICES セクション */
+/* =========================================
+   事業内容（3列グリッド・枠なし・上端の罫線のみ）
+   ========================================= */
+/* 事業内容は薄いグレー地にして、白のセクションとリズムをつける */
+#services {
+  background-color: var(--paper-2);
+}
+
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4) var(--sp-3);
 }
 
-.service-card {
-  background: var(--bg-white);
-  border: 2px solid var(--text-dark);
-  border-radius: 24px;
-  padding: 3.5rem 2.5rem;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: var(--shadow-sm);
-}
-
-.service-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--brand-green);
-  box-shadow: var(--shadow-lg);
-}
-
-.service-icon {
-  width: 64px;
-  height: 64px;
-  background: var(--bg-light);
-  border: 2px solid var(--text-dark);
-  border-radius: 16px;
+.service-item {
+  position: relative;
+  border-top: 1px solid var(--ink);
+  padding-top: var(--sp-3);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2.2rem;
-  font-size: 2rem;
-  transition: all 0.3s ease;
+  flex-direction: column;
 }
 
-.service-card:hover .service-icon {
-  background-color: var(--brand-green);
-  border-color: var(--brand-green);
-  color: var(--bg-white);
-  box-shadow: 0 8px 20px rgba(0, 195, 98, 0.25);
-  transform: rotate(-8deg) scale(1.08);
+/* 番号は右上に小さく */
+.service-num {
+  position: absolute;
+  top: var(--sp-3);
+  right: 0;
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
 }
 
-.service-card h3 {
-  font-size: 1.5rem;
-  font-weight: 900;
-  margin-bottom: 1.2rem;
+/* アイコンは薄緑の正方形の上に。ホバーで緑地に白のアイコン */
+.service-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  background-color: var(--paper-green);
+  color: var(--green-dark);
+  margin-bottom: var(--sp-2);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.service-card p {
-  color: var(--text-muted);
-  font-size: 0.98rem;
-  line-height: 1.65;
+.service-icon .icon {
+  width: 26px;
+  height: 26px;
 }
 
-/* 専門用語のやさしい補足（FDEの解説など） */
+.service-item:hover .service-icon {
+  background-color: var(--green);
+  color: #fff;
+}
+
+.service-item h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: var(--sp-1);
+}
+
+.service-item p {
+  color: var(--ink-2);
+  font-size: 0.95rem;
+  margin-bottom: var(--sp-2);
+  flex: 1;
+}
+
 .service-note {
   display: block;
-  margin-top: 0.9rem;
-  padding-top: 0.9rem;
-  border-top: 1px dashed var(--border-color);
+  margin-top: var(--sp-1);
   font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--text-muted);
+  color: var(--ink-3);
 }
 
-/* COMPANY セクション */
+/* 対応例（小さめの箇条書き・装飾なし） */
+.service-examples {
+  margin-bottom: var(--sp-2);
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+
+.service-examples-label {
+  display: block;
+  font-weight: 700;
+  color: var(--ink-2);
+  margin-bottom: 4px;
+}
+
+.service-examples ul {
+  list-style: none;
+}
+
+.service-examples li {
+  position: relative;
+  padding-left: 1em;
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+/* 行頭の小さな点（記号「・」の代わり） */
+.service-examples li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+
+/* 実績を示す小さな緑ラベル */
+.example-tag {
+  display: inline-block;
+  font-family: var(--font-en), var(--font-jp);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  padding: 0 5px;
+  line-height: 1.5;
+  margin-right: 6px;
+  vertical-align: 1px;
+}
+
+/* 「詳細・料金を見る」は文字リンク＋→ */
+.service-link {
+  align-self: flex-start;
+  color: var(--green-dark);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.service-link:hover {
+  border-bottom-color: var(--green-dark);
+}
+
+/* グリッド下の控えめな案内リンク */
+.services-more {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+
+.services-more a {
+  color: var(--green-dark);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.services-more a:hover {
+  border-bottom-color: var(--green-dark);
+}
+
+/* =========================================
+   会社概要（素の定義表）
+   ========================================= */
 .company-container {
-  max-width: 950px;
+  max-width: 800px;
   margin: 0 auto;
-  background: var(--bg-white);
-  border: 2px solid var(--text-dark);
-  border-radius: 32px;
-  padding: 3.5rem;
-  box-shadow: var(--shadow-md);
 }
 
 .info-table {
   width: 100%;
   border-collapse: collapse;
+  border-top: 1px solid var(--line);
 }
 
 .info-table tr {
-  border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.3s ease;
+  border-bottom: 1px solid var(--line);
 }
 
-.info-table tr:hover {
-  background-color: rgba(0, 195, 98, 0.03);
-}
-
-.info-table tr:last-child {
-  border-bottom: none;
-}
-
-.info-table th, .info-table td {
-  padding: 1.8rem 1rem;
+.info-table th,
+.info-table td {
+  padding: var(--sp-2) 0;
   text-align: left;
+  vertical-align: top;
 }
 
 .info-table th {
-  color: var(--brand-green);
-  font-weight: 800;
-  width: 25%;
-  font-size: 1.1rem;
+  width: 160px;
+  font-family: var(--font-en), var(--font-jp);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  padding-right: var(--sp-2);
+  padding-top: calc(var(--sp-2) + 3px);
 }
 
 .info-table td {
-  color: var(--text-dark);
-  font-size: 1.05rem;
-  font-weight: 500;
+  color: var(--ink);
+}
+
+.founder-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.founder-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 18%;
+  border: 2px solid var(--paper-green);
+  outline: 1px solid var(--line);
 }
 
 .founder-link {
-  color: var(--text-dark);
+  color: var(--ink);
   text-decoration: none;
-  font-weight: 800;
-  border-bottom: 2px dashed var(--brand-green);
-  padding-bottom: 2px;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.2s ease;
 }
 
 .founder-link:hover {
-  color: var(--brand-green);
-  border-bottom-style: solid;
+  border-bottom-color: var(--ink);
 }
 
 .founder-link .link-icon {
-  font-size: 0.85rem;
-  color: var(--brand-green);
-  transition: transform 0.3s ease;
-  display: inline-block;
+  font-size: 0.8em;
+  color: var(--ink-3);
 }
 
-.founder-link:hover .link-icon {
-  transform: translate(2px, -2px);
-}
-
-/* CONTACT セクション */
-.contact-container {
-  max-width: 750px;
-  margin: 0 auto;
-  background: var(--bg-white);
-  border: 2px solid var(--text-dark);
-  border-radius: 32px;
-  padding: 5rem 3rem;
-  box-shadow: var(--shadow-md);
+/* =========================================
+   お問い合わせ（中央寄せ・箱なし・背景だけ薄く）
+   ========================================= */
+/* 濃紺の帯で締める。波モチーフを左右に薄く */
+#contact {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ink-band);
+  color: #fff;
   text-align: center;
+}
+
+#contact::before,
+#contact::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  width: 55%;
+  height: 90%;
+  background: var(--wave) center / 100% auto no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+#contact::before { left: -18%; }
+#contact::after  { right: -18%; transform: scaleX(-1); }
+
+#contact > * {
+  position: relative;
+  z-index: 1;
+}
+
+#contact .section-header {
+  margin-bottom: var(--sp-3);
+}
+
+/* 中央寄せなので緑の罫線も中央に */
+#contact .section-header::before {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#contact .section-tag {
+  color: #6EE7A8;
 }
 
 .contact-lead {
-  color: var(--text-muted);
-  margin-bottom: 2.5rem;
-  font-size: 1.1rem;
-  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: var(--sp-3);
 }
 
-.btn-cta {
-  display: inline-block;
-  padding: 1.1rem 3rem;
-}
-
-/* フッター */
+/* =========================================
+   フッター（上に罫線。地味でよい）
+   ========================================= */
 footer {
-  background-color: var(--bg-white);
-  color: var(--text-dark);
-  padding: 5rem 10% 3rem;
-  position: relative;
-  /* フッターは外枠フレームを隠さないように配置 */
-  margin: 0 -12px -12px -12px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--line);
+  padding: var(--sp-4) 5% var(--sp-3);
 }
 
 .footer-content {
+  max-width: var(--max);
+  margin: 0 auto var(--sp-3);
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
   flex-wrap: wrap;
-  gap: 2.5rem;
-  margin-bottom: 4rem;
 }
 
-.footer-content .logo-text {
-  color: var(--text-dark);
-}
-
-/* 白背景フッターでも読める色にする（旧: 白の半透明で不可視だった） */
 .footer-tagline {
-  color: var(--text-muted);
-  font-size: 0.95rem;
+  color: var(--ink-2);
+  font-size: 0.9rem;
 }
 
 .footer-copyright {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  text-align: center;
-  width: 100%;
-  border-top: 1px solid var(--border-color);
-  padding-top: 2.5rem;
+  max-width: var(--max);
+  margin: 0 auto;
+  font-size: 0.8rem;
+  color: var(--ink-3);
 }
 
-/* スクロールアニメーション用クラス */
+/* =========================================
+   スクロール表示（main.js が .active を付ける）
+   初期状態でも見えるようにし、.active が付いた瞬間に短くフェードするだけ
+   ========================================= */
 .reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
 }
 
 .reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+  animation: revealFade 0.6s ease both;
 }
 
-/* カード類はセクション表示後、1枚ずつ時間差で現れる（スタッガー） */
-.reveal:not(.active) .service-card,
-.reveal:not(.active) .mvv-block {
-  opacity: 0;
-  transform: translateY(28px);
+@keyframes revealFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
 }
 
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(28px); }
-}
-
-.reveal.active .service-card,
-.reveal.active .mvv-block {
-  animation: cardIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-}
-
-.reveal.active .service-card:nth-child(2) { animation-delay: 0.08s; }
-.reveal.active .service-card:nth-child(3) { animation-delay: 0.16s; }
-.reveal.active .service-card:nth-child(4) { animation-delay: 0.24s; }
-.reveal.active .service-card:nth-child(5) { animation-delay: 0.32s; }
-.reveal.active .service-card:nth-child(6) { animation-delay: 0.40s; }
-.reveal.active .mvv-block:nth-child(2)    { animation-delay: 0.15s; }
-.reveal.active .mvv-block:nth-child(3)    { animation-delay: 0.30s; }
-
-/* レスポンシブ */
+/* =========================================
+   レスポンシブ
+   ========================================= */
 @media (max-width: 1024px) {
   .hero {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 8rem 5% 4rem;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 40%);
+    gap: var(--sp-3);
   }
-  
-  .hero-content {
-    align-items: center;
-    text-align: center;
+  .hero-visual img {
+    width: min(70%, 300px);
   }
-  
-  .hero h1 {
-    font-size: 3rem;
+  .mvv-num-badge {
+    font-size: 2.4rem;
   }
-  
-  .hero p {
-    margin-left: auto;
-    margin-right: auto;
+  .mvv-block {
+    padding: var(--sp-3);
   }
-  
-  .hero-visual {
-    width: 100%;
-    height: auto;
-    max-width: 500px;
-    margin: 0 auto;
+  .mvv-block:not(:last-child)::after {
+    left: calc(var(--sp-3) + 16px);
   }
-  
-  .hero-main-card {
-    height: 380px;
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mvv-block {
+    grid-template-columns: 180px 1fr;
+    gap: var(--sp-3);
   }
 }
 
 @media (max-width: 768px) {
-  body {
-    border-width: 8px;
-  }
-  
   header {
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    padding: 1rem 5%;
+    height: 56px;
+    padding: 0 4%;
   }
-  
-  /* ナビは消さずコンパクト表示にする（メニュー手段を残す） */
+  .logo-text {
+    font-size: 0.95rem;
+  }
   nav ul {
-    gap: 1.1rem;
+    gap: var(--sp-2);
   }
-
   nav a {
-    font-size: 0.72rem;
-    letter-spacing: 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
   }
-
   .section {
-    padding: 6rem 5% 3rem;
-    scroll-margin-top: 75px;
+    padding: var(--sp-4) 5%;
+    scroll-margin-top: 56px;
   }
-
-  .header-bg-text {
-    font-size: 3.4rem;
-    top: -1.6rem;
+  .section-header {
+    margin-bottom: var(--sp-3);
   }
-
-  .marquee {
-    padding: 0.8rem 0;
-  }
-
-  .marquee-track span {
-    font-size: 1rem;
-  }
-
-  .hero-blob-1, .hero-blob-2 {
-    width: 300px;
-    height: 300px;
-    filter: blur(70px);
-  }
-
-  .services-grid {
+  .hero {
+    min-height: 0;
     grid-template-columns: 1fr;
+    padding: 56px 0 0;
+    gap: 0;
   }
-
-  .mvv-vertical-container {
-    gap: 2.5rem;
+  .hero-content {
+    padding: var(--sp-3) 5% var(--sp-4);
   }
-  
+  /* 緑の色面は上に。高さを抑えてロゴを中央に */
+  .hero-visual {
+    order: -1;
+    padding: var(--sp-3) 0 96px;
+  }
+  .hero-visual::before {
+    height: 80px;
+  }
+  .hero-visual img {
+    width: 150px;
+  }
+  .hero-visual::after {
+    left: 5%;
+    bottom: var(--sp-2);
+  }
+  .mvv-num-badge {
+    font-size: 2rem;
+  }
+  .service-num {
+    top: var(--sp-3);
+  }
+  .hero-notes {
+    gap: var(--sp-2);
+    flex-direction: column;
+  }
   .mvv-block {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 2.5rem 1.8rem;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-2);
   }
-  
+  .mvv-block + .mvv-block {
+    margin-top: var(--sp-3);
+  }
+  .mvv-block:not(:last-child)::after {
+    left: calc(var(--sp-2) + 14px);
+    bottom: calc(-1 * var(--sp-3));
+    height: var(--sp-3);
+  }
   .mvv-block-header {
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
-    padding-right: 0;
-    padding-bottom: 1.2rem;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--sp-2);
   }
-  
-  .mvv-num-badge {
-    font-size: 2.2rem;
+  .mvv-label-jp {
+    margin-top: 0;
   }
-  
-  .info-table th {
-    width: 35%;
-    display: block;
-    padding-bottom: 0.5rem;
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
   }
-  
+  .info-table th,
   .info-table td {
     display: block;
-    padding-top: 0;
+    width: 100%;
+    padding: 0;
   }
-  
-  .contact-container {
-    padding: 3rem 1.5rem;
+  .info-table th {
+    padding-top: var(--sp-2);
+  }
+  .info-table td {
+    padding-bottom: var(--sp-2);
+  }
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
 @media (max-width: 480px) {
-  /* ロゴは画像だけにしてナビの居場所を確保 */
-  header .logo-text {
+  .logo-text {
     display: none;
   }
-
-  .hero h1 {
-    font-size: 2.3rem;
-    letter-spacing: -0.5px;
-  }
-
-  .hero p {
-    font-size: 1.02rem;
-  }
-
-  .btn-container {
-    flex-direction: column;
-    width: 100%;
-    max-width: 320px;
-  }
-
   .btn {
+    width: 100%;
     text-align: center;
-  }
-
-  /* 浮遊カードが画面外にはみ出さないようにする */
-  .floating-ui-card {
-    padding: 0.8rem;
-  }
-
-  .floating-ui-card-1 {
-    left: 0;
-  }
-
-  .floating-ui-card-2 {
-    right: 0;
-  }
-
-  .floating-info p {
-    display: none;
-  }
-
-  .section-title {
-    font-size: 2.1rem;
-  }
-
-  /* 小さい画面ではヘッダーが詰まるため日本語ラベルは省略 */
-  .mvv-label-jp {
-    display: none;
   }
 }
 
-/* アニメーションを減らす設定のユーザーには動きを止める（アクセシビリティ） */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+/* 大画面：文字とコンテンツ幅を一段大きくして、左右の余白が目立たないようにする */
+@media (min-width: 1600px) {
+  :root {
+    --max: 1400px;
   }
+  html {
+    font-size: 17px;
+  }
+}
 
+/* 動きを減らす設定を尊重 */
+@media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-
-  .marquee-track {
+  .reveal.active {
     animation: none;
-    flex-wrap: wrap;
   }
-}
-
-/* =========================================
-   LP（事業内容・料金プラン）用スタイル
-   ========================================= */
-.services-lp-body {
-  background-color: var(--bg-white);
-}
-
-.services-hero {
-  padding: 160px 10% 6rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  background-color: var(--bg-light);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.services-hero-content {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.services-hero h1 {
-  font-size: 3.2rem;
-  font-weight: 900;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-}
-
-.services-intro {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  line-height: 1.8;
-}
-
-.services-details-section {
-  padding: 6rem 10%;
-  background-color: var(--bg-white);
-}
-
-.services-details-container {
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-}
-
-.service-detail-card {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 2.5rem;
-  padding: 3.5rem;
-  background: var(--bg-white);
-  border: 1px solid var(--border-color);
-  border-radius: 24px;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  scroll-margin-top: 100px;
-}
-
-.service-detail-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--brand-green);
-}
-
-.service-detail-icon {
-  width: 80px;
-  height: 80px;
-  background: rgba(0, 195, 98, 0.08);
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2.5rem;
-}
-
-.service-detail-body h2 {
-  font-size: 1.6rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-  color: var(--text-dark);
-}
-
-.service-detail-desc {
-  font-size: 1.05rem;
-  color: var(--text-muted);
-  margin-bottom: 2rem;
-  line-height: 1.8;
-}
-
-.service-price-box {
-  background: var(--bg-light);
-  padding: 1.5rem 2rem;
-  border-radius: 12px;
-  border-left: 4px solid var(--text-muted);
-}
-
-.highlight-card {
-  border: 2px solid var(--brand-green);
-  box-shadow: 0 10px 30px rgba(0, 195, 98, 0.1);
-}
-
-.highlight-price {
-  background: rgba(0, 195, 98, 0.05);
-  border-left-color: var(--brand-green);
-}
-
-.price-label {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--text-muted);
-  margin-bottom: 0.3rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.highlight-price .price-label {
-  color: var(--brand-green);
-}
-
-.price-value {
-  font-size: 1.8rem;
-  font-weight: 900;
-  color: var(--text-dark);
-}
-
-.price-note {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-muted);
-}
-
-.price-subtext {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-}
-
-.services-cta {
-  background: var(--brand-green);
-  padding: 6rem 10%;
-  text-align: center;
-  color: var(--bg-white);
-}
-
-.services-cta h2 {
-  font-size: 2.2rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-  color: var(--bg-white);
-}
-
-.services-cta p {
-  font-size: 1.1rem;
-  margin-bottom: 2.5rem;
-  opacity: 0.9;
-}
-
-.btn-large {
-  font-size: 1.1rem;
-  padding: 1.2rem 3.5rem;
-  background: var(--bg-white);
-  color: var(--brand-green);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  border: none;
-}
-
-.btn-large:hover {
-  background: var(--bg-light);
-  color: var(--brand-green);
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-}
-
-.btn-back {
-  border-color: rgba(0,0,0,0.1);
-  font-size: 0.85rem;
-  padding: 0.6rem 1.2rem;
-}
-
-/* スマホ対応 */
-@media screen and (max-width: 768px) {
-  .services-hero h1 {
-    font-size: 2.2rem;
-  }
-  .service-detail-card {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 2rem;
-  }
-  .service-detail-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.8rem;
-  }
-}
-
-/* ========================================
-   FOUNDER'S STORY ページ（story.html）
-   ======================================== */
-.story-section {
-  padding: 6rem 5% 7rem;
-  background-color: var(--bg-light);
-}
-
-.story-container {
-  max-width: 880px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.story-block {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 2.5rem;
-  background: var(--bg-white);
-  border: 2px solid var(--text-dark);
-  border-radius: 28px;
-  padding: 3.5rem;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.story-block:hover {
-  transform: translateY(-3px);
-  border-color: var(--brand-green);
-}
-
-.story-num {
-  font-family: var(--font-en);
-  font-size: 3rem;
-  font-weight: 900;
-  color: var(--brand-green);
-  line-height: 1;
-  border-right: 1px solid var(--border-color);
-  padding-right: 1.5rem;
-}
-
-.story-mvv .story-num {
-  font-size: 1.7rem;
-  letter-spacing: 1px;
-}
-
-.story-body h2 {
-  font-size: 1.9rem;
-  font-weight: 900;
-  line-height: 1.45;
-  margin-bottom: 1.8rem;
-  color: var(--text-dark);
-}
-
-.story-body p {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  line-height: 1.9;
-  margin-bottom: 1.2rem;
-}
-
-.story-body p:last-child {
-  margin-bottom: 0;
-}
-
-.story-body strong {
-  color: var(--text-dark);
-  font-weight: 800;
-}
-
-/* 想いを強調する引用ブロック */
-.story-quote {
-  background: rgba(0, 195, 98, 0.05);
-  border-left: 4px solid var(--brand-green);
-  border-radius: 0 14px 14px 0;
-  padding: 1.6rem 1.8rem;
-  margin: 1.8rem 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-  line-height: 1.85;
-  color: var(--text-dark);
-}
-
-.story-table {
-  margin-top: 1.5rem;
-}
-
-.story-table th {
-  width: 30%;
-  vertical-align: top;
-  line-height: 1.5;
-}
-
-.story-th-note {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-top: 0.3rem;
-}
-
-.story-footnote {
-  margin-top: 1.8rem;
-  padding-top: 1.5rem;
-  border-top: 1px dashed var(--border-color);
-  font-size: 0.95rem !important;
-}
-
-@media (max-width: 768px) {
-  .story-section {
-    padding: 4rem 5% 5rem;
-  }
-
-  .story-block {
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
-    padding: 2.5rem 1.8rem;
-  }
-
-  .story-num {
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
-    padding-right: 0;
-    padding-bottom: 1rem;
-    font-size: 2.4rem;
-  }
-
-  .story-body h2 {
-    font-size: 1.5rem;
-  }
-
-  .story-table th,
-  .story-table td {
-    display: block;
-    width: 100%;
-  }
-}
-
-/* VISIONからストーリーページへの導線 */
-.story-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.8rem;
-  font-weight: 800;
-  font-size: 1rem;
-  color: var(--brand-green);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.3s ease, gap 0.3s ease;
-}
-
-.story-link:hover {
-  border-bottom-color: var(--brand-green);
-  gap: 0.9rem;
-}
-
-/* VISIONの2本柱への導入文 */
-.vision-lead {
-  margin-bottom: 1.8rem !important;
-}
-
-/* 代表社員の顔写真（会社概要テーブル内） */
-.founder-cell {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.founder-photo {
-  width: 92px;
-  height: 92px;
-  object-fit: cover;
-  object-position: center 18%;
-  border-radius: 50%;
-  flex-shrink: 0;
-  border: 3px solid var(--brand-green);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
-}
-
-.founder-photo:hover {
-  transform: scale(1.05);
-}
-
-@media (max-width: 600px) {
-  .founder-photo {
-    width: 72px;
-    height: 72px;
+  * {
+    transition: none !important;
   }
 }

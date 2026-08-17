@@ -9,7 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4.2">
+  <!-- 共通（header / footer / ボタン / トークン）は style.css、このページ固有は services.css -->
+  <link rel="stylesheet" href="style.css?v=5.0">
+  <link rel="stylesheet" href="services.css?v=1.0">
 </head>
 <body class="services-lp-body">
 
@@ -21,120 +23,246 @@
     </a>
     <nav>
       <ul>
-        <li><a href="index.html" class="btn btn-outline btn-back">← トップページへ戻る</a></li>
+        <li><a href="index.html" class="btn btn-secondary btn-back">← トップページへ戻る</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- LPヒーローセクション -->
+  <!-- ページ見出し -->
   <section class="services-hero reveal">
-    <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
-    <div class="services-hero-content">
+    <div class="services-hero-inner">
       <span class="section-tag">SERVICE DETAILS</span>
       <h1>事業内容と<br><span class="highlight-text">料金プランのご案内</span></h1>
       <p class="services-intro">
-        私たちはお客様の課題やビジネスの状況に合わせて、最適なAIソリューションをご提案します。<br>
-        基本的な料金は<strong>「要相談」</strong>とさせていただき、細かいサービス内容も個々にご相談のうえ、<br>
+        私たちはお客様の課題やビジネスの状況に合わせて、最適なAIソリューションをご提案します。
+        料金は<strong>最小構成の目安</strong>を掲載しています。サービス内容は個々にご相談のうえ、
         柔軟にカスタマイズさせていただきます。お気軽にお問い合わせください。
       </p>
     </div>
+    <!-- 6サービスの目次（各項目へジャンプ） -->
+    <nav class="services-toc" aria-label="サービス一覧">
+      <span class="services-toc-label">INDEX</span>
+      <ol>
+        <li><a href="#service-1"><span class="toc-num">01</span>生成AI研修・セミナー</a></li>
+        <li><a href="#service-2"><span class="toc-num">02</span>生成AIツール導入支援</a></li>
+        <li><a href="#service-3"><span class="toc-num">03</span>AXコンサルティング</a></li>
+        <li><a href="#service-4"><span class="toc-num">04</span>IT・AIソリューション実装</a></li>
+        <li><a href="#service-5"><span class="toc-num">05</span>研究開発・共同研究</a></li>
+        <li><a href="#service-6"><span class="toc-num">06</span>フォワードデプロイドエンジニア</a></li>
+      </ol>
+    </nav>
   </section>
 
-  <!-- サービス詳細リスト -->
+  <!-- サービス詳細リスト（アイコンは自作の線画SVG。stroke 1.5 / currentColor / 24×24） -->
   <section class="services-details-section">
     <div class="services-details-container">
-      
+
       <!-- サービス1: セミナー -->
       <article id="service-1" class="service-detail-card reveal highlight-card">
-        <div class="service-detail-icon">🎓</div>
+        <div class="service-detail-meta">
+          <span class="service-detail-icon" aria-hidden="true">
+            <!-- 学位帽 -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 9.5 12 5l10 4.5L12 14 2 9.5z"/>
+              <path d="M6.5 11.5v4.3c0 1.5 2.5 2.7 5.5 2.7s5.5-1.2 5.5-2.7v-4.3"/>
+              <path d="M22 9.5V15"/>
+            </svg>
+          </span>
+          <span class="service-detail-num">01</span>
+        </div>
         <div class="service-detail-body">
           <h2>生成AI研修・セミナー</h2>
           <p class="service-detail-desc">
             公的機関・企業・個人を対象に、生成AIの基礎から実務での使いこなしまでを、専門知識がなくても分かるように伝える研修・セミナーを企画・開催します。組織や個人のAIリテラシー向上を力強く支援します。
           </p>
-          <div class="service-price-box highlight-price">
-            <span class="price-label">基本料金</span>
-            <span class="price-value">5,000円〜 <span class="price-note">/ 1時間</span></span>
-            <p class="price-subtext">※内容や参加人数、開催場所等に応じたお見積りとなります。</p>
+          <div class="service-examples">
+            <h3 class="service-examples-title">対応例</h3>
+            <ul>
+              <li>自治体・団体向け「生成AIを1日で使えるようになる」講座</li>
+              <li>大学・研究室向け 論文執筆・文献調査での活用</li>
+              <li>経営者向け「AIで自動化できる業務の棚卸し」勉強会</li>
+            </ul>
           </div>
+        </div>
+        <div class="service-price-box highlight-price">
+          <span class="price-label">基本料金</span>
+          <span class="price-value">5,000円〜 <span class="price-note">/ 1時間</span></span>
+          <p class="price-subtext">※内容や参加人数、開催場所等に応じたお見積りとなります。</p>
         </div>
       </article>
 
       <!-- サービス2: 導入支援 -->
       <article id="service-2" class="service-detail-card reveal highlight-card">
-        <div class="service-detail-icon">🛠️</div>
+        <div class="service-detail-meta">
+          <span class="service-detail-icon" aria-hidden="true">
+            <!-- 工具（スパナ） -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.5 6.2 16.8 9.9l-2.7-2.7 3.7-3.7a5.2 5.2 0 0 0-6.9 6.7L4 17.1a2 2 0 0 0 2.9 2.9l6.9-6.9a5.2 5.2 0 0 0 6.7-6.9z"/>
+            </svg>
+          </span>
+          <span class="service-detail-num">02</span>
+        </div>
         <div class="service-detail-body">
           <h2>生成AIツール導入支援</h2>
           <p class="service-detail-desc">
             Claude Code、Antigravity、ChatGPT、Coworkなど、最新の生成AIツールの選定から導入設定、社内での定着までを一気通貫でサポートします。お客様の目的や業務内容に合わせて最適なツールをご提案し、使いこなせるようになるまで伴走します。
           </p>
-          <div class="service-price-box highlight-price">
-            <span class="price-label">初期導入パック</span>
-            <span class="price-value">30,000円〜 <span class="price-note"></span></span>
-            <p class="price-subtext">※アカウント開設、初期設定、基本的な使い方のオンボーディング講習が含まれます。保守サポート等は別途ご相談。<br><strong>※AIツール自体の利用料（月額サブスクリプション費用・API従量課金など）は本料金に含まれず、お客様のご負担となります。</strong></p>
+          <div class="service-examples">
+            <h3 class="service-examples-title">対応例</h3>
+            <ul>
+              <li>法人アカウント開設〜社内利用ルール（入力してよい情報の線引き）の整備</li>
+              <li>Googleドライブ・Notionの資料をAIに読ませて質問できる状態にする</li>
+            </ul>
           </div>
+        </div>
+        <div class="service-price-box highlight-price">
+          <span class="price-label">初期導入パック</span>
+          <span class="price-value">30,000円〜 <span class="price-note"></span></span>
+          <p class="price-subtext">※アカウント開設、初期設定、基本的な使い方のオンボーディング講習が含まれます。保守サポート等は別途ご相談。<br><strong>※AIツール自体の利用料（月額サブスクリプション費用・API従量課金など）は本料金に含まれず、お客様のご負担となります。</strong></p>
         </div>
       </article>
 
       <!-- サービス3: AXコンサル -->
       <article id="service-3" class="service-detail-card reveal">
-        <div class="service-detail-icon">💡</div>
+        <div class="service-detail-meta">
+          <span class="service-detail-icon" aria-hidden="true">
+            <!-- 電球 -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a6 6 0 0 0-3.9 10.6c.6.5.9 1.2.9 2V16h6v-.4c0-.8.3-1.5.9-2A6 6 0 0 0 12 3z"/>
+              <path d="M9.5 19h5"/>
+              <path d="M10.5 21.5h3"/>
+            </svg>
+          </span>
+          <span class="service-detail-num">03</span>
+        </div>
         <div class="service-detail-body">
           <h2>AX（AIトランスフォーメーション）コンサルティング</h2>
           <p class="service-detail-desc">
             「AIで何ができるか分からない」「自社にどう活用できるか知りたい」という企業・自治体・団体様のもとへ直接伺い、現在の業務フローをヒアリングします。生成AIの導入による業務効率化、自動化、DX推進の具体的なロードマップを提案・伴走支援し、根本的な業務の変革を導きます。
           </p>
-          <div class="service-price-box">
-            <span class="price-label">料金目安</span>
-            <span class="price-value">要相談 <span class="price-note">（プロジェクトの規模・期間によります）</span></span>
+          <div class="service-examples">
+            <h3 class="service-examples-title">対応例</h3>
+            <ul>
+              <li>現場に1日入り「AIに渡せる仕事」を洗い出すロードマップ作成</li>
+              <li>抵抗感の強い組織で対話を重ねる導入設計</li>
+            </ul>
           </div>
+        </div>
+        <div class="service-price-box">
+          <span class="price-label">料金目安</span>
+          <span class="price-value">100,000円〜 <span class="price-note">/ 月</span></span>
+          <p class="price-subtext">※現場訪問＋ロードマップ策定の月額顧問型。初回ヒアリングは無料。規模・期間に応じてお見積り</p>
         </div>
       </article>
 
       <!-- サービス4: ソリューション実装 -->
       <article id="service-4" class="service-detail-card reveal">
-        <div class="service-detail-icon">💻</div>
+        <div class="service-detail-meta">
+          <span class="service-detail-icon" aria-hidden="true">
+            <!-- ノートPC -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="5" width="16" height="11" rx="1"/>
+              <path d="M2 19h20"/>
+            </svg>
+          </span>
+          <span class="service-detail-num">04</span>
+        </div>
         <div class="service-detail-body">
           <h2>IT・AIソリューション実装</h2>
           <p class="service-detail-desc">
             機密情報を扱うための社内専用セキュアチャットAIツールの構築や、日々のルーティンワーク（データ入力、要約、レポート作成等）を自動化するAIアシスタントの構築などを行います。現場で誰でも「カンタンに使える」実践的なソリューションを開発・提供します。
           </p>
-          <div class="service-price-box">
-            <span class="price-label">料金目安</span>
-            <span class="price-value">要相談 <span class="price-note">（開発するシステムの規模や要件によります）</span></span>
+          <div class="service-examples">
+            <h3 class="service-examples-title">対応例</h3>
+            <ul>
+              <li><span class="example-tag">事例</span>経理業務の自動化（領収書→仕訳→帳簿）</li>
+              <li><span class="example-tag">事例</span>名刺の発注〜経費計上までの一気通貫自動化</li>
+              <li><span class="example-tag">事例</span>シフト表の自動作成</li>
+              <li><span class="example-tag">事例</span>会社・個人のホームページ制作（多言語対応）</li>
+              <li>見積書・請求書の自動生成、フォーム→スプレッドシート→通知の連携</li>
+              <li>記事の定期自動生成・予約投稿</li>
+              <li>社内文書だけに答えるチャットボット</li>
+              <li>海外サイト・法制度の定期巡回と要約レポート</li>
+            </ul>
           </div>
+        </div>
+        <div class="service-price-box">
+          <span class="price-label">料金目安</span>
+          <span class="price-value">300,000円〜 <span class="price-note">/ 1件</span></span>
+          <p class="price-subtext">※小規模なチャットAI・業務自動化ツール1本の目安。要件に応じてお見積り</p>
         </div>
       </article>
 
       <!-- サービス5: 共同研究 -->
       <article id="service-5" class="service-detail-card reveal">
-        <div class="service-detail-icon">🔬</div>
+        <div class="service-detail-meta">
+          <span class="service-detail-icon" aria-hidden="true">
+            <!-- 顕微鏡 -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 3h5"/>
+              <rect x="10" y="3" width="3" height="8" rx="0.5"/>
+              <path d="M11.5 11v3"/>
+              <path d="M6.5 14h9"/>
+              <path d="M17.5 21v-4a5 5 0 0 0-3.5-4.8"/>
+              <path d="M4 21h16"/>
+            </svg>
+          </span>
+          <span class="service-detail-num">05</span>
+        </div>
         <div class="service-detail-body">
           <h2>研究開発・共同研究</h2>
           <p class="service-detail-desc">
             大学や研究機関、他企業様との共同による、最先端の生成AIモデルの応用研究や、実用化に向けた研究委託を請け負います。学術的な知見とビジネスの現場を繋ぎ、技術の底上げと新たなイノベーションの創出へ貢献します。
           </p>
-          <div class="service-price-box">
-            <span class="price-label">料金目安</span>
-            <span class="price-value">要相談</span>
+          <div class="service-examples">
+            <h3 class="service-examples-title">対応例</h3>
+            <ul>
+              <li><span class="example-tag">事例</span>AI政策・技術受容に関する国際比較調査（アジア生産性機構 APO 受託）</li>
+              <li>大学と連携した生成AI活用の実証・調査研究（学会発表を前提）</li>
+            </ul>
           </div>
+        </div>
+        <div class="service-price-box">
+          <span class="price-label">料金目安</span>
+          <span class="price-value">要相談</span>
+          <p class="price-subtext">※研究費・受託研究の枠組みに応じて個別にご相談</p>
         </div>
       </article>
 
       <!-- サービス6: FDE -->
       <article id="service-6" class="service-detail-card reveal">
-        <div class="service-detail-icon">🤝</div>
+        <div class="service-detail-meta">
+          <span class="service-detail-icon" aria-hidden="true">
+            <!-- 握手 -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 8h3.5l6 6"/>
+              <path d="M22 8h-3.5l-3.8-2.3a2 2 0 0 0-2.1 0L9.8 7.5a1.4 1.4 0 0 0 1.4 2.4l2-1.2"/>
+              <path d="m13.2 8.7 4.6 4.6a1.4 1.4 0 0 1-2 2l-1-1a1.4 1.4 0 0 1-2 2l-1-1a1.4 1.4 0 0 1-2 2l-1.3-1.3"/>
+            </svg>
+          </span>
+          <span class="service-detail-num">06</span>
+        </div>
         <div class="service-detail-body">
           <h2>フォワードデプロイドエンジニア（FDE）</h2>
           <p class="service-detail-desc">
             エンジニア自身がお客様の現場に入り込み、実際の業務を間近で見ながら、その場でAIの仕組みを作り込む伴走型の開発スタイルです。「ツールを納品して終わり」ではなく、現場に深く踏み込み、本当に使えるものになるまで一緒に育て上げます。
           </p>
-          <div class="service-price-box">
-            <span class="price-label">料金目安</span>
-            <span class="price-value">要相談 <span class="price-note">（月額稼働ベース または プロジェクトベース）</span></span>
+          <div class="service-examples">
+            <h3 class="service-examples-title">対応例</h3>
+            <ul>
+              <li>週1日現場に入り小さな自動化を積み上げる伴走</li>
+              <li>職員がAIに触れる横で「怖くない」を体感してもらう常駐</li>
+            </ul>
           </div>
         </div>
+        <div class="service-price-box">
+          <span class="price-label">料金目安</span>
+          <span class="price-value">200,000円〜 <span class="price-note">/ 月</span></span>
+          <p class="price-subtext">※週1日稼働ベースの目安。稼働日数に応じて増減</p>
+        </div>
       </article>
+
+      <p class="services-price-common-note">※上記は最小構成の目安です。内容に応じて個別にお見積りします。</p>
 
     </div>
   </section>
@@ -148,8 +276,15 @@
     </div>
   </section>
 
-  <!-- フッター -->
+  <!-- フッター（トップページと同じ構成） -->
   <footer>
+    <div class="footer-content">
+      <a href="index.html" class="logo-container">
+        <img src="assets/logo.png" alt="生成AIイノベーション合同会社 ロゴ" class="logo-img" loading="lazy">
+        <span class="logo-text">GenAI<span>Innovation</span></span>
+      </a>
+      <p class="footer-tagline">新潟から、AIによる社会イノベーションを切り拓く。</p>
+    </div>
     <div class="footer-copyright">
       &copy; <span id="copyright-year">2026</span> 生成ＡＩイノベーション合同会社. All Rights Reserved.
     </div>

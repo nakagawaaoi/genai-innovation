@@ -731,7 +731,7 @@ nav a:hover {
    会社概要（素の定義表）
    ========================================= */
 .company-container {
-  max-width: 800px;
+  max-width: 1080px; /* 2カラム化（写真300px＋表）に合わせて拡大。旧800px */
   margin: 0 auto;
 }
 

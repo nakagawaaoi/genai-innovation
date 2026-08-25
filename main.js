@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, {
-    threshold: 0.15 // 15%見えたらトリガー
+    // 背の高いセクションはビューポートに対して15%が交差しないことがあるため、
+    // 「少しでも見えたら」発火にする（アンカー直リンクで真っ白になる問題の対策）
+    threshold: 0.01
   });
 
   revealElements.forEach(el => {

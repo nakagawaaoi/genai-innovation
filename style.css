@@ -36,6 +36,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* PCでは本文が小さく感じるため、ベースを1px上げる（rem基準なので全体が連動） */
+@media (min-width: 900px) {
+  html { font-size: 17px; }
+}
+
 body {
   background-color: var(--paper);
   color: var(--ink);

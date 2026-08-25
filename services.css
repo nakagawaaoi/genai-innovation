@@ -260,7 +260,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
-  color: var(--ink-3, #94a3b8);
+  color: var(--green-dark, #00994D); /* コーポレートカラー（文字用の緑） */
   margin-bottom: var(--sp-1, 8px);
 }
 
@@ -298,10 +298,6 @@
 }
 
 /* 料金が明示されている項目（研修・導入支援）はラベルだけ緑にして目印にする。枠や影は付けない */
-.highlight-price .price-label {
-  color: var(--green-dark, #00994D);
-}
-
 /* .highlight-card はアンカー等で参照される可能性があるので残すが、旧版の緑枠・影は使わない */
 .highlight-card {
   border-color: var(--line, #e2e8f0);

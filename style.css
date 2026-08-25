@@ -767,20 +767,69 @@ nav a:hover {
   color: var(--ink);
 }
 
-.founder-cell {
+/* 代表プロフィール（会社概要の左カラム・2026-08-25 写真を大きく独立させた） */
+.company-container {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+.company-rep {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: var(--sp-2);
 }
 
-.founder-photo {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
+.rep-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 691 / 800;
   object-fit: cover;
-  object-position: center 18%;
-  border: 2px solid var(--paper-green);
-  outline: 1px solid var(--line);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+.rep-role {
+  font-family: var(--font-en);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-dark);
+}
+
+.rep-name {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.rep-kana {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--ink-3);
+  margin-left: 0.8em;
+  letter-spacing: 0.06em;
+}
+
+.rep-bio {
+  font-size: 0.875rem;
+  color: var(--ink-2);
+  line-height: 1.9;
+  margin-top: 6px;
+}
+
+@media (max-width: 900px) {
+  .company-container {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+  }
+  .rep-photo {
+    width: min(260px, 70vw);
+  }
 }
 
 .founder-link {

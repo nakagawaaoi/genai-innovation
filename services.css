@@ -300,8 +300,25 @@
 /* 料金が明示されている項目（研修・導入支援）はラベルだけ緑にして目印にする。枠や影は付けない */
 /* .highlight-card はアンカー等で参照される可能性があるので残すが、旧版の緑枠・影は使わない */
 .highlight-card {
-  border-color: var(--line, #e2e8f0);
+  /* 主力サービス（03 生成AIツール導入支援）だけ薄緑の色面で目立たせる（2026-08-25 本人指示） */
+  background: var(--paper-green, #ecf8f1);
+  border-top: 3px solid var(--green, #00C362);
+  padding-left: var(--sp-3, 32px);
+  padding-right: var(--sp-3, 32px);
   box-shadow: none;
+  position: relative;
+}
+.highlight-card::before {
+  content: '主力サービス';
+  position: absolute;
+  top: 0;
+  right: var(--sp-3, 32px);
+  background: var(--green-deep, #0a4a31);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
 }
 
 /* ---------- CTA（相談導線） ---------- */

@@ -529,3 +529,288 @@
     font-size: 1.25rem;
   }
 }
+
+/* ================================================================
+   対応できるツール（#tools）
+   ベンダー中立であることを見せる。カードは使わず罫線で区切る
+   ================================================================ */
+.tools-section {
+  padding: var(--sp-5) var(--sp-3);
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+}
+.tools-inner { max-width: var(--max); margin: 0 auto; }
+.tools-inner h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900;
+  margin: var(--sp-1) 0 var(--sp-2);
+  line-height: 1.4;
+}
+.tools-lead {
+  max-width: 68ch;
+  color: var(--ink-2);
+  line-height: 1.95;
+  font-size: 0.9375rem;
+  margin-bottom: var(--sp-3);
+}
+.tools-lead strong { color: var(--ink); font-weight: 700; }
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+}
+.tool-group { border-top: 2px solid var(--green); padding-top: var(--sp-2); }
+.tool-group h3 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+.tool-group h3 small {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--ink-3);
+  margin-top: 3px;
+}
+.tool-group p { font-size: 0.875rem; color: var(--ink-2); line-height: 1.9; }
+.tools-note {
+  margin-top: var(--sp-3);
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+
+/* ================================================================
+   AIに渡しやすい仕事の見分け方（#how-to-sort）
+   ================================================================ */
+.sort-section { padding: var(--sp-5) var(--sp-3); border-top: 1px solid var(--line); }
+.sort-inner { max-width: var(--max); margin: 0 auto; }
+.sort-inner h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900;
+  margin: var(--sp-1) 0 var(--sp-2);
+  line-height: 1.4;
+}
+.sort-lead {
+  max-width: 68ch;
+  color: var(--ink-2);
+  line-height: 1.95;
+  font-size: 0.9375rem;
+  margin-bottom: var(--sp-3);
+}
+.sort-cols { display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--sp-4); }
+.sort-h {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--green);
+  margin-bottom: var(--sp-2);
+}
+.sort-h-no { color: var(--ink-2); border-bottom-color: var(--line); }
+.sort-list { list-style: none; counter-reset: sortnum; }
+.sort-list li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sort-list b { display: block; font-size: 0.9375rem; font-weight: 700; }
+.sort-list span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  line-height: 1.8;
+}
+ol.sort-list li { counter-increment: sortnum; padding-left: 32px; position: relative; }
+ol.sort-list li::before {
+  content: counter(sortnum);
+  position: absolute;
+  left: 0;
+  top: 14px;
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--green-dark);
+}
+.sort-list-no li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22px;
+  width: 10px;
+  height: 1px;
+  background: var(--ink-3);
+}
+.sort-list-no li { padding-left: 22px; position: relative; }
+.sort-note {
+  margin-top: var(--sp-2);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  line-height: 1.9;
+}
+.sort-note strong { color: var(--ink); font-weight: 700; }
+
+/* ================================================================
+   よくいただくご相談（#faq）
+   ================================================================ */
+.faq-section {
+  padding: var(--sp-5) var(--sp-3);
+  background: var(--paper-green);
+  border-top: 1px solid var(--line);
+}
+.faq-inner { max-width: var(--max); margin: 0 auto; }
+.faq-inner h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900;
+  margin: var(--sp-1) 0 var(--sp-3);
+  line-height: 1.4;
+}
+.faq-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--sp-4); }
+.faq-list > div { padding: 16px 0; border-bottom: 1px solid rgba(10, 74, 49, 0.14); }
+.faq-list dt {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  line-height: 1.55;
+}
+.faq-list dd {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  position: relative;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+  line-height: 1.85;
+}
+.faq-list dd::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: 0.625rem;
+  color: var(--green-dark);
+}
+.faq-close {
+  margin-top: var(--sp-3);
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+  line-height: 1.9;
+}
+.faq-close strong { color: var(--green-deep); font-weight: 700; }
+
+@media (max-width: 900px) {
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+  .sort-cols { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .faq-list { grid-template-columns: 1fr; gap: 0; }
+}
+@media (max-width: 560px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .tools-section, .sort-section, .faq-section { padding: var(--sp-4) var(--sp-2); }
+}
+
+/* ================================================================
+   AI顧問と導入支援の違い（#compare）
+   ここが売りの核心。違いは「チャットの回数」と「手を動かすか」の2点
+   ================================================================ */
+.compare-section {
+  padding: var(--sp-5) var(--sp-3);
+  border-top: 1px solid var(--line);
+}
+.compare-inner { max-width: var(--max); margin: 0 auto; }
+.compare-inner h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900;
+  margin: var(--sp-1) 0 var(--sp-2);
+  line-height: 1.4;
+}
+.compare-lead {
+  max-width: 68ch;
+  color: var(--ink-2);
+  line-height: 1.95;
+  font-size: 0.9375rem;
+  margin-bottom: var(--sp-3);
+}
+.compare-lead strong { color: var(--ink); font-weight: 700; }
+
+.compare-key {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+.ck {
+  border-top: 3px solid var(--green);
+  padding-top: var(--sp-2);
+  position: relative;
+}
+.ck-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: var(--green-deep);
+  color: #fff;
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.ck b { display: block; font-size: 1.0625rem; font-weight: 700; margin-bottom: 8px; }
+.ck p { font-size: 0.875rem; color: var(--ink-2); line-height: 1.9; }
+.ck p strong { color: var(--green-deep); font-weight: 700; }
+
+.compare-table-wrap { overflow-x: auto; }
+.compare-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.compare-table thead th {
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+  vertical-align: bottom;
+}
+.compare-table thead th span {
+  display: block;
+  font-family: var(--font-en);
+  font-size: 0.9375rem;
+  color: var(--green-dark);
+  margin-top: 4px;
+}
+.compare-table thead th.th-hi { background: var(--paper-green); border-bottom-color: var(--green); }
+.compare-table tbody th {
+  padding: 13px 16px;
+  text-align: left;
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--line);
+  width: 22%;
+}
+.compare-table tbody td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+.compare-table td.td-hi { background: var(--paper-green); color: var(--ink); }
+.compare-table td b { font-weight: 700; color: var(--green-deep); }
+.compare-note {
+  margin-top: var(--sp-3);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  line-height: 1.9;
+}
+.compare-note strong { color: var(--ink); font-weight: 700; }
+
+@media (max-width: 900px) {
+  .compare-key { grid-template-columns: 1fr; gap: var(--sp-2); }
+}
+@media (max-width: 560px) {
+  .compare-section { padding: var(--sp-4) var(--sp-2); }
+}

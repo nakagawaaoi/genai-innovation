@@ -1077,3 +1077,49 @@ footer {
     transition: none !important;
   }
 }
+
+/* ---------- AIでできること（index #can-do） ---------- */
+/* 「AIで何ができるか分からない」への答え。カードは使わず、罫線＋番号で既存の作法に揃える */
+.cando-lead {
+  max-width: 68ch;
+  margin-top: var(--sp-2);
+  color: var(--ink-2);
+  line-height: 1.95;
+  font-size: 0.9375rem;
+}
+.cando-lead strong { color: var(--ink); font-weight: 700; }
+
+.cando-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
+}
+.cando-item {
+  border-top: 1px solid var(--line);
+  padding-top: var(--sp-2);
+}
+.cando-num {
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--green-dark);
+}
+.cando-item h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.55;
+  margin: 6px 0 8px;
+}
+.cando-item p {
+  font-size: 0.875rem;
+  color: var(--ink-2);
+  line-height: 1.85;
+}
+
+@media (max-width: 900px) {
+  .cando-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .cando-grid { grid-template-columns: 1fr; gap: var(--sp-2); }
+}

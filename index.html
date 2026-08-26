@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=5.5">
+  <link rel="stylesheet" href="style.css?v=5.6">
 
   <!-- 構造化データ（検索エンジン向け会社情報） -->
   <script type="application/ld+json">
@@ -55,7 +55,11 @@
       <img src="assets/logo.png" alt="生成AIイノベーション合同会社 ロゴ" class="logo-img">
       <span class="logo-text">GenAI<span>Innovation</span></span>
     </a>
-    <nav>
+    <!-- スマホではハンバーガーボタンで開閉（2026-08-26 ナビ5項目がスマホ幅で崩れたため追加） -->
+    <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="global-nav" class="global-nav">
       <ul>
         <li><a href="#about">MISSION</a></li>
         <li><a href="#company">COMPANY</a></li>
@@ -203,10 +207,10 @@
         <tr>
           <th>主な事業内容</th>
           <td>
-            1. AI/ITを活用したコンサルティング・仲介業務<br>
-            2. ソフトウェア・ハードウェアの企画・研究・開発・販売<br>
-            3. 学術出版物の発行および経営コンサルティング<br>
-            4. Webサイト・ECサイトの企画・制作・運営管理
+            <span class="biz-item">1. AI/ITを活用したコンサルティング・仲介業務</span>
+            <span class="biz-item">2. ソフトウェア・ハードウェアの企画・研究・開発・販売</span>
+            <span class="biz-item">3. 学術出版物の発行および経営コンサルティング</span>
+            <span class="biz-item">4. Webサイト・ECサイトの企画・制作・運営管理</span>
           </td>
         </tr>
       </table>
@@ -384,6 +388,6 @@
     </div>
   </footer>
 
-  <script src="main.js?v=1.1"></script>
+  <script src="main.js?v=1.2"></script>
 </body>
 </html>

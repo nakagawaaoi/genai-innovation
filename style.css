@@ -123,6 +123,13 @@ nav a {
   padding-bottom: 4px;
   border-bottom: 2px solid transparent;
   transition: color 0.2s ease, border-color 0.2s ease;
+  /* 「WHAT YOU CAN DO」のような複数語の項目が途中で折り返さないように */
+  white-space: nowrap;
+}
+
+/* ハンバーガーボタンはスマホ幅（640px以下）でだけ表示 */
+.nav-toggle {
+  display: none;
 }
 
 nav a:hover {
@@ -767,6 +774,13 @@ nav a:hover {
   color: var(--ink);
 }
 
+/* 主な事業内容の各行。折り返し2行目が番号の下に潜らないよう、ぶら下げインデントにする */
+.info-table .biz-item {
+  display: block;
+  padding-left: 1.4em;
+  text-indent: -1.4em;
+}
+
 /* 代表プロフィール（会社概要の左カラム・2026-08-25 写真を大きく独立させた） */
 .company-container {
   display: grid;
@@ -1073,17 +1087,80 @@ footer {
   .info-table td {
     padding-bottom: var(--sp-2);
   }
+  /* スマホでは写真・プロフィールの直下に区切り線が密集して見えるので、表の上端の線を消して間隔を空ける */
+  .info-table {
+    border-top: none;
+    margin-top: var(--sp-2);
+  }
   .footer-content {
     flex-direction: column;
     align-items: flex-start;
   }
 }
 
-@media (max-width: 480px) {
-  /* ヘッダーはロゴ画像だけ。フッターには会社名を残す */
-  header .logo-text {
+/* =========================================
+   スマホのナビ（ハンバーガーメニュー・2026-08-26 追加）
+   ナビ5項目が640px以下で収まらなくなったため、開閉式に切り替える。
+   services.html のヘッダー（戻るボタンだけの nav）には影響しないよう
+   .global-nav / .nav-toggle に限定して指定する。
+   ========================================= */
+@media (max-width: 640px) {
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-right: -8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--ink);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  /* 開いている間は3本線を×印に変形 */
+  header.nav-open .nav-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  header.nav-open .nav-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+  header.nav-open .nav-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .global-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid var(--line);
     display: none;
   }
+  header.nav-open .global-nav {
+    display: block;
+  }
+  .global-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 6px 4% 10px;
+  }
+  .global-nav a {
+    display: block;
+    padding: 12px 0;
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* ナビがハンバーガー化して余白ができたので、ヘッダーの社名ロゴはスマホでも表示する */
   footer .logo-text {
     font-size: 0.9rem;
   }
@@ -1098,14 +1175,6 @@ footer {
   /* 強制改行をやめて自然に折り返す */
   .contact-lead br {
     display: none;
-  }
-  /* 番号付きの行は2行目を字下げ */
-  .info-table td {
-    text-indent: -1.4em;
-    padding-left: 1.4em;
-  }
-  .info-table td .founder-cell {
-    text-indent: 0;
   }
 }
 

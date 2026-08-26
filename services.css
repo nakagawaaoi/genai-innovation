@@ -773,7 +773,15 @@ ol.sort-list li::before {
 .ck p { font-size: 0.875rem; color: var(--ink-2); line-height: 1.9; }
 .ck p strong { color: var(--green-deep); font-weight: 700; }
 
-.compare-table-wrap { overflow-x: auto; }
+/* スクロール案内はスマホ幅でだけ表示（表がはみ出す幅でしか意味がないため） */
+.compare-scroll-hint {
+  display: none;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  text-align: center;
+  margin-bottom: 8px;
+}
+.compare-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .compare-table {
   width: 100%;
   min-width: 640px;
@@ -823,6 +831,14 @@ ol.sort-list li::before {
 
 @media (max-width: 900px) {
   .compare-key { grid-template-columns: 1fr; gap: var(--sp-2); }
+}
+@media (max-width: 700px) {
+  .compare-scroll-hint { display: block; }
+  /* スマホでは余白を詰めて、1画面に入る列を少しでも増やす */
+  .compare-table { min-width: 560px; font-size: 0.8125rem; }
+  .compare-table thead th,
+  .compare-table tbody th,
+  .compare-table tbody td { padding: 11px 10px; }
 }
 @media (max-width: 560px) {
   .compare-section { padding: var(--sp-4) var(--sp-2); }

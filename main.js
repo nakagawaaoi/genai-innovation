@@ -28,6 +28,28 @@ window.addEventListener('scroll', () => {
   siteHeader.classList.toggle('is-scrolled', window.scrollY > 50);
 });
 
+// スマホ用ハンバーガーメニューの開閉（index.html のみ。services.html にはボタンが無いので何もしない）
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('header');
+  const toggle = document.querySelector('.nav-toggle');
+  if (!header || !toggle) return;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = header.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    toggle.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+  });
+
+  // メニュー内のリンクを押したら閉じる（アンカー移動後にメニューが被ったままにならないように）
+  header.querySelectorAll('.global-nav a').forEach((link) => {
+    link.addEventListener('click', () => {
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'メニューを開く');
+    });
+  });
+});
+
 // コピーライトの年度を自動更新
 document.addEventListener('DOMContentLoaded', () => {
   const copyrightYear = document.getElementById('copyright-year');

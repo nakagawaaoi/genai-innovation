@@ -1,0 +1,5 @@
+# 生成ＡＩイノベーション合同会社 コーポレートサイト
+User-agent: *
+Allow: /
+
+Sitemap: https://genai-innov.com/sitemap.xml

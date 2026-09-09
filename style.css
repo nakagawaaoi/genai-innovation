@@ -1246,3 +1246,117 @@ footer {
 @media (max-width: 560px) {
   .cando-grid { grid-template-columns: 1fr; gap: var(--sp-2); }
 }
+
+/* =========================================
+   動き（スクロール・読み込み）
+   ---------------------------------------------------------------
+   方針: 派手に動かさない。「読む速さより少し先に、静かに現れる」だけ。
+   ・main.js が data-anim と --anim-delay を自動で付ける。HTML には何も書かない
+   ・JS が無効／IntersectionObserver 非対応／「動きを減らす」設定のときは
+     html に .js-anim が付かない → 何も隠れない（真っ白事故を起こさない）
+   ========================================= */
+
+/* 【重要】要素を opacity:0 で「隠しておいて、後で出す」書き方は使わない。
+   何かの拍子に出す処理が動かないと本文が消える（過去に一度やっている）。
+   ここでは初期状態を一切いじらず、画面に入った瞬間に
+   「0 から現れる」アニメーションを1回かけるだけにする。
+   → 動かなければ、ただ普通に表示されるだけで済む */
+
+.js-anim [data-anim].is-in {
+  animation-duration: 0.75s;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation-fill-mode: both;
+  animation-delay: var(--anim-delay, 0ms);
+}
+
+.js-anim [data-anim="up"].is-in   { animation-name: animUp; }
+.js-anim [data-anim="left"].is-in { animation-name: animLeft; }
+.js-anim [data-anim="zoom"].is-in { animation-name: animZoom; }
+
+@keyframes animUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes animLeft {
+  from { opacity: 0; transform: translateX(-34px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes animZoom {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* セクション単位のフェードは、中身が個別に動くようになったので止める */
+.js-anim .reveal.active { animation: none; }
+
+/* 見出しの上の緑の罫線は、左から引く */
+.js-anim .section-header::before { transform-origin: left center; }
+.js-anim .section-header.is-in::before {
+  animation: lineGrow 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.05s both;
+}
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* =========================================
+   波の線画を流す（風が引いていく感じ）
+   520px で1周期になる専用の波（元の波と同じ形）を repeat-x で敷き、位置をずらし続ける
+   ========================================= */
+:root {
+  --wave-flow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 300' preserveAspectRatio='none' fill='none' stroke='%2300C362' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M0 55c130-40 390 40 520 0'/%3E%3Cpath d='M0 125c130-40 390 40 520 0'/%3E%3Cpath d='M0 195c130-40 390 40 520 0'/%3E%3Cpath d='M0 265c130-40 390 40 520 0'/%3E%3C/svg%3E");
+}
+
+.hero-visual::before {
+  background-image: var(--wave-flow);
+  background-repeat: repeat-x;
+  background-size: 520px 100%;
+  background-position: 0 center;
+  animation: waveDrift 30s linear infinite;
+}
+
+@keyframes waveDrift {
+  from { background-position-x: 0; }
+  to   { background-position-x: -520px; }
+}
+
+/* スマホでは波の帯が細い（110px）ので、4本すべて入れると潰れて見える。
+   縦に引き伸ばして下側だけを見せ、2本だけがゆっくり流れる形にする */
+@media (max-width: 768px) {
+  .hero-visual::before {
+    background-size: 420px 260%;
+    background-position: 0 bottom;
+  }
+}
+
+/* VISION の帯・お問い合わせの波は、位置を変えず、ごくゆっくり漂わせるだけ */
+.vision-block::after {
+  animation: waveSway 26s ease-in-out infinite alternate;
+}
+
+@keyframes waveSway {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-3%, 4px, 0); }
+}
+
+/* =========================================
+   スクロールの進み具合を示す細い線（ヘッダーの下端）
+   main.js が要素をつくって body に置く
+   ========================================= */
+.scroll-progress {
+  position: fixed;
+  top: 63px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 900;
+  background: var(--green);
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* ヘッダーの高さは 768px 以下で 64px → 56px に変わる。線もそこへ合わせる */
+@media (max-width: 768px) {
+  .scroll-progress { top: 55px; }
+}

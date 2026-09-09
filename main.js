@@ -57,3 +57,130 @@ document.addEventListener('DOMContentLoaded', () => {
     copyrightYear.textContent = new Date().getFullYear();
   }
 });
+
+/* =========================================================
+   スクロールに合わせた動き（index.html / services.html 共通）
+   ---------------------------------------------------------
+   ・ここで data-anim と --anim-delay を付ける。HTML 側には何も書かない
+   ・「動きを減らす」設定の人、IntersectionObserver が無い環境では
+     何もしない＝ html に .js-anim を付けないので、CSS 側も一切隠さない
+   ・セレクタが 1 つも当たらない場合は、そのまま何もしない（ページ共通で使える）
+   ========================================================= */
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduceMotion.matches || !('IntersectionObserver' in window)) return;
+
+  // [セレクタ, 動きの向き, 同じ親の中で1つずつ遅らせる間隔(ms)]
+  const GROUPS = [
+    // --- 共通 ---
+    ['.hero-content > *',                 'up',    90],
+    ['.hero-visual img',                  'zoom',   0],
+    ['.section-header > *',               'up',    70],
+    // --- index.html ---
+    ['.mvv-block',                        'left',   0],
+    ['.value-vertical-item',              'left',  90],
+    ['.services-grid > .service-item',    'up',    80],
+    ['.cando-grid > .cando-item',         'up',    55],
+    ['.company-container > *',            'up',    80],
+    ['.biz-item',                         'up',    55],
+    ['.contact-container > *',            'up',    90],
+    // --- services.html ---
+    ['.tools-lead',                       'up',     0],
+    ['.tools-grid > *',                   'up',    60],
+    ['.toc li',                           'up',    45],
+    ['.service-detail-meta > *',          'up',    60],
+    ['.service-detail-desc',              'up',     0],
+    ['.service-examples',                 'up',    60],
+    ['.service-price-box',                'up',     0],
+    ['.price-common-box',                 'up',     0],
+    ['.compare-key > *',                  'left',  110],
+    ['.compare-table-wrap',               'up',     0],
+    ['.compare-note',                     'up',     0],
+    ['.sort-cols > *',                    'left',  120],
+    ['.faq-list > *',                     'up',    50],
+    ['.cta-content > *',                  'up',    90],
+  ];
+
+  const MAX_DELAY = 420; // 待たされている感じにならない上限
+
+  const targets = new Set();
+
+  GROUPS.forEach(([selector, kind, step]) => {
+    const counter = new Map(); // 親ごとに「何番目か」を数える
+    document.querySelectorAll(selector).forEach((el) => {
+      if (el.dataset.anim) return; // 先に別のグループで指定済みなら触らない
+      el.dataset.anim = kind;
+      const parent = el.parentElement;
+      const index = counter.get(parent) || 0;
+      counter.set(parent, index + 1);
+      if (step > 0) {
+        el.style.setProperty('--anim-delay', Math.min(index * step, MAX_DELAY) + 'ms');
+      }
+      targets.add(el);
+    });
+  });
+
+  // 見出しの緑の罫線を引くために、見出しのまとまり自体も見張る
+  document.querySelectorAll('.section-header').forEach((el) => targets.add(el));
+
+  if (targets.size === 0) return;
+
+  document.documentElement.classList.add('js-anim');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      observer.unobserve(entry.target);
+    });
+  }, {
+    // 「少しでも画面に入ったら」発火させる。遅らせると、
+    // 見えている要素に後からアニメーションがかかってちらつく
+    threshold: 0.01,
+  });
+
+  targets.forEach((el) => observer.observe(el));
+
+  // 補足: タブが裏に回っていると IntersectionObserver は発火しない。
+  // その状態でも表示は崩れない（隠していないため）が、
+  // 表に戻ってきたときに素直にアニメーションが始まるよう、位置だけ見直す。
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) return;
+    targets.forEach((el) => {
+      if (el.classList.contains('is-in')) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('is-in');
+        observer.unobserve(el);
+      }
+    });
+  });
+})();
+
+/* =========================================================
+   スクロールの進み具合を示す細い線（ヘッダーの下端）
+   ========================================================= */
+(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.addEventListener('DOMContentLoaded', () => document.body.appendChild(bar));
+
+  let ticking = false;
+  const update = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+    bar.style.setProperty('--progress', ratio.toFixed(4));
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }, { passive: true });
+
+  window.addEventListener('resize', update, { passive: true });
+})();

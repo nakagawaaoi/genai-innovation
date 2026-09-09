@@ -529,11 +529,94 @@
 }
 
 /* 料金一覧末尾の共通注釈 */
-.services-price-common-note {
-  margin-top: var(--sp-2, 16px);
-  font-size: 0.8rem;
-  line-height: 1.7;
-  color: var(--ink-3, #94a3b8);
+/* 金額の横に置く共通事項への印。数字だけを小さく上付きにする */
+.price-mark {
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: 0.45em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--green-dark, #00994D);
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+  white-space: nowrap;
+}
+
+.price-mark:hover,
+.price-mark:focus-visible {
+  color: var(--green-deep, #0a4a31);
+  border-bottom-style: solid;
+}
+
+/* 全サービス共通の料金注記。各カードに繰り返さず、一覧の最後に1回だけ置く */
+.price-common-box {
+  margin-top: var(--sp-3, 32px);
+  padding: var(--sp-3, 32px);
+  background: var(--paper-green, #ecf8f1);
+  border-left: 3px solid var(--green, #00C362);
+  border-radius: 0 var(--radius, 4px) var(--radius, 4px) 0;
+  scroll-margin-top: 96px;
+}
+
+.price-common-title {
+  margin: 0 0 var(--sp-1, 8px);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green-deep, #0a4a31);
+}
+
+.price-common-lead {
+  margin: 0 0 var(--sp-2, 16px);
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: var(--ink-2, #475569);
+}
+
+.price-common-list {
+  margin: 0;
+  display: grid;
+  gap: var(--sp-2, 16px);
+}
+
+.price-common-item {
+  padding-top: var(--sp-2, 16px);
+  border-top: 1px solid rgba(10, 74, 49, 0.14);
+}
+
+.price-common-item dt {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink, #0f172a);
+}
+
+.price-common-mark {
+  display: inline-block;
+  margin-right: 8px;
+  font-family: var(--font-en, 'Outfit', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--green-dark, #00994D);
+}
+
+.price-common-item dd {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.85;
+  color: var(--ink-2, #475569);
+}
+
+.price-common-item dd strong {
+  color: var(--ink, #0f172a);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .price-common-box {
+    padding: var(--sp-2, 16px);
+  }
 }
 
 /* スマホ幅: CTA 見出しが「くださ／い。」で折れないよう少し小さく */

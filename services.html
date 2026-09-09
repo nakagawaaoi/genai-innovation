@@ -64,15 +64,23 @@
 </head>
 <body class="services-lp-body">
 
-  <!-- ヘッダー（戻るボタン付き） -->
+  <!-- ヘッダー -->
   <header>
     <a href="index.html" class="logo-container">
       <img src="assets/logo.png" alt="生成AIイノベーション合同会社 ロゴ" class="logo-img">
       <span class="logo-text">GenAI<span>Innovation</span></span>
     </a>
-    <nav>
+    <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="global-nav" class="global-nav">
       <ul>
-        <li><a href="index.html" class="btn btn-secondary btn-back">← トップページへ戻る</a></li>
+        <li><a href="index.html#about">MISSION</a></li>
+        <li><a href="services.html">SERVICES</a></li>
+        <li><a href="index.html#can-do">CASES</a></li>
+        <li><a href="index.html#news">NEWS</a></li>
+        <li><a href="index.html#company">COMPANY</a></li>
+        <li><a href="index.html#contact">CONTACT</a></li>
       </ul>
     </nav>
   </header>
@@ -552,12 +560,21 @@
         <span class="logo-text">GenAI<span>Innovation</span></span>
       </a>
       <p class="footer-tagline">新潟から、AIによる社会イノベーションを切り拓く。</p>
+      <div class="footer-nav">
+        <a href="index.html">トップページ</a>
+        <span class="footer-nav-divider">／</span>
+        <a href="services.html">事業内容・料金プラン</a>
+        <span class="footer-nav-divider">／</span>
+        <a href="news.html">お知らせ</a>
+        <span class="footer-nav-divider">／</span>
+        <a href="index.html#contact">お問い合わせ</a>
+      </div>
     </div>
     <div class="footer-copyright">
       &copy; <span id="copyright-year">2026</span> 生成ＡＩイノベーション合同会社. All Rights Reserved.
     </div>
   </footer>
 
-  <script src="main.js?v=1.2"></script>
+  <script src="main.js?v=1.3"></script>
 </body>
 </html>

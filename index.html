@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=5.7">
+  <link rel="stylesheet" href="style.css?v=5.8">
 
   <!-- 構造化データ（検索エンジン向け会社情報） -->
   <script type="application/ld+json">
@@ -133,9 +133,10 @@
     <nav id="global-nav" class="global-nav">
       <ul>
         <li><a href="#about">MISSION</a></li>
-        <li><a href="#company">COMPANY</a></li>
         <li><a href="#services">SERVICES</a></li>
-        <li><a href="#can-do">WHAT YOU CAN DO</a></li>
+        <li><a href="#can-do">CASES</a></li>
+        <li><a href="#news">NEWS</a></li>
+        <li><a href="#company">COMPANY</a></li>
         <li><a href="#contact">CONTACT</a></li>
       </ul>
     </nav>
@@ -239,52 +240,6 @@
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- COMPANY セクション -->
-  <section id="company" class="section reveal">
-    <div class="section-header">
-      <span class="section-tag">COMPANY</span>
-      <h2 class="section-title">会社概要</h2>
-    </div>
-    <div class="company-container">
-      <div class="company-rep">
-        <img src="assets/founder.jpg" alt="代表社員 中川 碧偉" class="rep-photo" width="691" height="800" loading="lazy">
-        <div class="rep-body">
-          <span class="rep-role">代表社員 / CEO</span>
-          <span class="rep-name">中川 碧偉<span class="rep-kana">なかがわ あおい</span></span>
-          <p class="rep-bio">新潟大学にて技術経営（MOT）を研究（大学院進学予定）。研究で得た知見を、新潟の企業の現場に還元することを事業の柱としています。</p>
-          <a href="https://nakagawaaoi.github.io/" target="_blank" rel="noopener" class="founder-link">プロフィール・研究業績を見る <span class="link-icon">↗</span></a>
-        </div>
-      </div>
-      <table class="info-table">
-        <tr>
-          <th>商号</th>
-          <td>生成ＡＩイノベーション合同会社</td>
-        </tr>
-        <tr>
-          <th>設立</th>
-          <td>2026年7月15日</td>
-        </tr>
-        <tr>
-          <th>代表社員</th>
-          <td>中川 碧偉</td>
-        </tr>
-        <tr>
-          <th>本店所在地</th>
-          <td>新潟県新潟市江南区</td>
-        </tr>
-        <tr>
-          <th>主な事業内容</th>
-          <td>
-            <span class="biz-item">1. AI/ITを活用したコンサルティング・仲介業務</span>
-            <span class="biz-item">2. ソフトウェア・ハードウェアの企画・研究・開発・販売</span>
-            <span class="biz-item">3. 学術出版物の発行および経営コンサルティング</span>
-            <span class="biz-item">4. Webサイト・ECサイトの企画・制作・運営管理</span>
-          </td>
-        </tr>
-      </table>
     </div>
   </section>
 
@@ -414,7 +369,7 @@
   <!-- AIでできること -->
   <section id="can-do" class="section reveal">
     <div class="section-header">
-      <span class="section-tag">WHAT BECOMES POSSIBLE</span>
+      <span class="section-tag">CASES</span>
       <h2 class="section-title">AIで、こんなことができるようになります</h2>
       <p class="cando-lead">「AIで何ができるのか」は、外から見ているだけでは分かりません。できることが多すぎるからです。ここに並べたのは、代表が実際に手を動かして<strong>効果が出たものだけ</strong>です。</p>
     </div>
@@ -427,6 +382,124 @@
       <div class="cando-item"><span class="cando-num">06</span><h3>議事録・報告書・求人原稿</h3><p>下書きまでを自動で。人は確認して出すだけです。</p></div>
       <div class="cando-item"><span class="cando-num">07</span><h3>定期巡回と要約レポート</h3><p>決まったサイトや制度情報を見に行き、要点だけ届けます。</p></div>
       <div class="cando-item"><span class="cando-num">08</span><h3>設定・連携の壁を越える</h3><p>つまずいたところを調べて、できる状態になるまで一緒に進めます。</p></div>
+    </div>
+  </section>
+
+  <!-- NEWS & TOPICS（お知らせ）カルーセルセクション -->
+  <section id="news" class="section reveal news-section">
+    <div class="news-section-header">
+      <div class="news-header-text">
+        <span class="section-tag">NEWS & TOPICS</span>
+        <h2 class="section-title">お知らせ</h2>
+        <p class="news-lead">生成AIイノベーション合同会社の最新情報、公的認定、活動実績をお届けします。</p>
+      </div>
+      <div class="news-header-action">
+        <a href="news.html" class="news-view-all-link">すべてのお知らせを見る <span aria-hidden="true">→</span></a>
+        <!-- 複数記事がある際に回すカルーセル操作ボタン（初期は単一記事のため非表示） -->
+        <div class="carousel-nav-btns" id="carousel-nav-btns" style="display: none;">
+          <button type="button" class="carousel-btn prev-btn" id="news-prev-btn" aria-label="前のお知らせへ">←</button>
+          <button type="button" class="carousel-btn next-btn" id="news-next-btn" aria-label="次のお知らせへ">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ニュースカルーセルトラック（直近最大4件まで横に並んでぐるぐる回る設計） -->
+    <div class="news-carousel-container">
+      <div class="news-carousel-track" id="news-track">
+        
+        <!-- ニュース1: NICO DXパートナー登録（正式登録記事） -->
+        <article class="news-square-card">
+          <div class="news-card-badge-row">
+            <span class="news-card-badge badge-official">公的登録</span>
+            <time datetime="2026-09-07" class="news-card-date">2026.09.07</time>
+          </div>
+          <div class="news-card-thumb">
+            <img src="assets/nico-logo.png" alt="NICOロゴ" class="news-card-img" loading="lazy">
+          </div>
+          <div class="news-card-content">
+            <h3 class="news-card-title">
+              <a href="news.html">公益財団法人にいがた産業創造機構（NICO）「新潟県DXパートナー」に登録されました</a>
+            </h3>
+            <p class="news-card-desc">
+              新潟県内の中小企業・自治体のDX推進を伴走支援するため、NICOが運営するパートナー制度に正式登録されました。
+            </p>
+          </div>
+          <div class="news-card-footer">
+            <a href="news.html" class="news-card-arrow-link">
+              <span>詳細を読む</span>
+              <span class="arrow-icon" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPANY セクション -->
+  <section id="company" class="section reveal">
+    <div class="section-header">
+      <span class="section-tag">COMPANY</span>
+      <h2 class="section-title">会社概要</h2>
+    </div>
+    <div class="company-container">
+      <div class="company-rep">
+        <img src="assets/founder.jpg" alt="代表社員 中川 碧偉" class="rep-photo" width="691" height="800" loading="lazy">
+        <div class="rep-body">
+          <span class="rep-role">代表社員 / CEO</span>
+          <span class="rep-name">中川 碧偉<span class="rep-kana">なかがわ あおい</span></span>
+          <p class="rep-bio">新潟大学にて技術経営（MOT）を研究（大学院進学予定）。研究で得た知見を、新潟の企業の現場に還元することを事業の柱としています。</p>
+          <a href="https://nakagawaaoi.github.io/" target="_blank" rel="noopener" class="founder-link">プロフィール・研究業績を見る <span class="link-icon">↗</span></a>
+        </div>
+      </div>
+      <table class="info-table">
+        <tr>
+          <th>商号</th>
+          <td>生成ＡＩイノベーション合同会社</td>
+        </tr>
+        <tr>
+          <th>設立</th>
+          <td>2026年7月15日</td>
+        </tr>
+        <tr>
+          <th>代表社員</th>
+          <td>中川 碧偉</td>
+        </tr>
+        <tr>
+          <th>本店所在地</th>
+          <td>新潟県新潟市江南区</td>
+        </tr>
+        <tr>
+          <th>主な事業内容</th>
+          <td>
+            <span class="biz-item">1. AI/ITを活用したコンサルティング・仲介業務</span>
+            <span class="biz-item">2. ソフトウェア・ハードウェアの企画・研究・開発・販売</span>
+            <span class="biz-item">3. 学術出版物の発行および経営コンサルティング</span>
+            <span class="biz-item">4. Webサイト・ECサイトの企画・制作・運営管理</span>
+          </td>
+        </tr>
+        <tr>
+          <th>公的登録</th>
+          <td>
+            <span class="biz-item">新潟県DXパートナー（公益財団法人にいがた産業創造機構 NICO）</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 新潟県DXパートナー 特設カード -->
+    <div class="dx-partner-card">
+      <div class="dx-partner-logo-area">
+        <img src="assets/nico-logo.png" alt="公益財団法人にいがた産業創造機構 NICO 公式ロゴ" class="dx-partner-logo" width="360" height="36" loading="lazy">
+      </div>
+      <div class="dx-partner-content">
+        <div class="dx-partner-badge">公的パートナーシップ</div>
+        <h3 class="dx-partner-title">新潟県DXパートナー 登録企業</h3>
+        <p class="dx-partner-desc">
+          当社は、公益財団法人にいがた産業創造機構（NICO）が運営する「新潟県DXパートナー」の登録事業者です。新潟県内の中小企業・自治体の皆様が抱えるデジタル化・業務改善の課題に対し、現場目線に立った実践的な生成AI導入・研修・自動化を伴走支援いたします。
+        </p>
+        <a href="news.html" class="dx-partner-link">登録の詳細・ご提供メニューを見る <span aria-hidden="true">→</span></a>
+      </div>
     </div>
   </section>
 
@@ -453,12 +526,19 @@
         <span class="logo-text">GenAI<span>Innovation</span></span>
       </a>
       <p class="footer-tagline">新潟から、AIによる社会イノベーションを切り拓く。</p>
+      <div class="footer-nav">
+        <a href="services.html">事業内容・料金プラン</a>
+        <span class="footer-nav-divider">／</span>
+        <a href="news.html">お知らせ</a>
+        <span class="footer-nav-divider">／</span>
+        <a href="#contact">お問い合わせ</a>
+      </div>
     </div>
     <div class="footer-copyright">
       &copy; <span id="copyright-year">2026</span> 生成ＡＩイノベーション合同会社. All Rights Reserved.
     </div>
   </footer>
 
-  <script src="main.js?v=1.2"></script>
+  <script src="main.js?v=1.3"></script>
 </body>
 </html>

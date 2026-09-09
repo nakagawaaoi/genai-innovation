@@ -77,11 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
     ['.hero-visual img',                  'zoom',   0],
     ['.section-header > *',               'up',    70],
     // --- index.html ---
+    ['.news-square-card',                 'up',    60],
     ['.mvv-block',                        'left',   0],
     ['.value-vertical-item',              'left',  90],
     ['.services-grid > .service-item',    'up',    80],
     ['.cando-grid > .cando-item',         'up',    55],
     ['.company-container > *',            'up',    80],
+    ['.dx-partner-card',                  'up',     0],
     ['.biz-item',                         'up',    55],
     ['.contact-container > *',            'up',    90],
     // --- services.html ---
@@ -184,3 +186,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('resize', update, { passive: true });
 })();
+
+/* =========================================================
+   ニュースカルーセル（左右ボタンでぐるぐる回す）
+   ※直近最大4枚まで追加された際に自動でカルーセルが有効化される設計
+   ========================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('news-track');
+  const navBtns = document.getElementById('carousel-nav-btns');
+  const prevBtn = document.getElementById('news-prev-btn');
+  const nextBtn = document.getElementById('news-next-btn');
+  if (!track || !prevBtn || !nextBtn) return;
+
+  const cards = track.querySelectorAll('.news-square-card');
+  if (cards.length > 1 && navBtns) {
+    navBtns.style.display = 'flex'; // 2枚以上あればボタンを表示してぐるぐる回せる
+  }
+
+  const scrollStep = 300;
+
+  nextBtn.addEventListener('click', () => {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (track.scrollLeft >= maxScroll - 10) {
+      track.scrollTo({ left: 0, behavior: 'smooth' }); // ループ
+    } else {
+      track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (track.scrollLeft <= 10) {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      track.scrollTo({ left: maxScroll, behavior: 'smooth' }); // ループ
+    } else {
+      track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+    }
+  });
+});

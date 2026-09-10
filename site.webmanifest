@@ -1,0 +1,15 @@
+{
+  "name": "生成AIイノベーション合同会社",
+  "short_name": "生成AIイノベーション",
+  "description": "新潟の生成AI導入支援・AI研修・AI顧問",
+  "icons": [
+    { "src": "/favicon-96x96.png", "sizes": "96x96", "type": "image/png" },
+    { "src": "/favicon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ],
+  "theme_color": "#0a4a31",
+  "background_color": "#ffffff",
+  "display": "browser",
+  "lang": "ja",
+  "start_url": "/"
+}

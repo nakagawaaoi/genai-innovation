@@ -646,13 +646,6 @@ nav a:hover {
   color: var(--ink-2);
 }
 
-.service-examples-label {
-  display: block;
-  font-weight: 700;
-  color: var(--ink-2);
-  margin-bottom: 4px;
-}
-
 .service-examples ul {
   list-style: none;
 }

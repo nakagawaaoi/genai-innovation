@@ -501,9 +501,11 @@
 }
 
 .pager-link {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  /* flex にすると子が「flexアイテム」になり、-webkit-box（行数制限）が
+     flow-root に潰されてタイトルが1行で切れる。block のままにしておく */
+  display: block;
+  /* style.css の `nav a { white-space: nowrap }` がここにも効いてしまうため打ち消す */
+  white-space: normal;
   text-decoration: none;
   color: inherit;
   padding: 12px 14px;
@@ -529,6 +531,8 @@ a.pager-link:hover {
 }
 
 .pager-dir {
+  display: block;
+  margin-bottom: 4px;
   font-family: var(--font-en);
   font-size: 0.75rem;
   font-weight: 800;

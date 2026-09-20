@@ -1484,10 +1484,12 @@ footer {
   border-radius: 3px;
 }
 
-/* 四角いニュースカード */
+/* 四角いニュースカード
+   幅は「3.25枚分」。4枚目が少しだけ覗くので、続きがあることが一目で分かり、
+   記事が何本になっても必ず横スクロールが生まれる（＝カルーセルが機能する）。
+   固定幅にすると画面が広いときに全部収まってしまい、回らなくなる */
 .news-square-card {
-  flex: 0 0 280px;
-  width: 280px;
+  flex: 0 0 calc((100% - 3 * 20px) / 3.25);
   min-height: 380px;
   scroll-snap-align: start;
   background: #ffffff;
@@ -1691,10 +1693,22 @@ footer {
   }
 
   .news-square-card {
-    flex: 0 0 260px;
-    width: 260px;
+    /* スマホは1枚を大きく見せ、次の1枚をわずかに覗かせる */
+    flex: 0 0 calc(100% - 44px);
     min-height: 360px;
   }
+}
+
+/* タブレットは2枚＋次の覗き */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .news-square-card {
+    flex: 0 0 calc((100% - 2 * 20px) / 2.25);
+  }
+}
+
+/* カードが横に広がった分、サムネも高さを合わせる */
+.news-square-card .news-card-thumb {
+  height: 120px;
 }
 
 /* =========================================

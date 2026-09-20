@@ -188,8 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 /* =========================================================
-   ニュースカルーセル（左右ボタンでぐるぐる回す）
-   ※直近最大4枚まで追加された際に自動でカルーセルが有効化される設計
+   ニュースカルーセル（自動送り＋左右ボタンでぐるぐる回す）
+   ・カード2枚以上で操作ボタンと自動送りが有効になる
+   ・マウスを乗せている間／操作中／タブが裏にある間は止める
+   ・「動きを減らす」設定の方には自動送りをしない
    ========================================================= */
 document.addEventListener('DOMContentLoaded', () => {
   const track = document.getElementById('news-track');
@@ -199,27 +201,110 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!track || !prevBtn || !nextBtn) return;
 
   const cards = track.querySelectorAll('.news-square-card');
-  if (cards.length > 1 && navBtns) {
-    navBtns.style.display = 'flex'; // 2枚以上あればボタンを表示してぐるぐる回せる
+  if (cards.length < 2) {
+    if (navBtns) navBtns.style.display = 'none'; // 1枚しかないなら回す意味がない
+    return;
   }
+  if (navBtns) navBtns.style.display = 'flex';
 
-  const scrollStep = 300;
+  // カード1枚分ずつ送る（幅はCSS側で変わるので毎回測る）
+  const step = () => {
+    const first = track.querySelector('.news-square-card');
+    if (!first) return 300;
+    const gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
+    return first.getBoundingClientRect().width + gap;
+  };
+  const maxScroll = () => track.scrollWidth - track.clientWidth;
 
-  nextBtn.addEventListener('click', () => {
-    const maxScroll = track.scrollWidth - track.clientWidth;
-    if (track.scrollLeft >= maxScroll - 10) {
-      track.scrollTo({ left: 0, behavior: 'smooth' }); // ループ
+  const next = () => {
+    if (track.scrollLeft >= maxScroll() - 10) {
+      track.scrollTo({ left: 0, behavior: 'smooth' }); // 端まで来たら先頭へ戻る
     } else {
-      track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+      track.scrollBy({ left: step(), behavior: 'smooth' });
     }
-  });
+  };
 
-  prevBtn.addEventListener('click', () => {
+  const prev = () => {
     if (track.scrollLeft <= 10) {
-      const maxScroll = track.scrollWidth - track.clientWidth;
-      track.scrollTo({ left: maxScroll, behavior: 'smooth' }); // ループ
+      track.scrollTo({ left: maxScroll(), behavior: 'smooth' });
     } else {
-      track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+      track.scrollBy({ left: -step(), behavior: 'smooth' });
     }
+  };
+
+  nextBtn.addEventListener('click', () => { next(); restart(); });
+  prevBtn.addEventListener('click', () => { prev(); restart(); });
+
+  /* ---- 自動送り ---- */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const INTERVAL = 5000;
+  let timer = null;
+  let visible = true; // セクションが画面内にあるか
+
+  const canAuto = () => !reduceMotion.matches && visible && !document.hidden;
+
+  const start = () => {
+    if (timer || !canAuto()) return;
+    timer = setInterval(() => {
+      if (canAuto()) next();
+    }, INTERVAL);
+  };
+  const stop = () => {
+    if (timer) { clearInterval(timer); timer = null; }
+  };
+  const restart = () => { stop(); start(); };
+
+  // 触っている間は止める（読んでいる最中に流れると邪魔なので）
+  const section = track.closest('.news-section') || track;
+  ['mouseenter', 'focusin', 'touchstart', 'pointerdown'].forEach((ev) =>
+    section.addEventListener(ev, stop, { passive: true }));
+  ['mouseleave', 'focusout', 'touchend'].forEach((ev) =>
+    section.addEventListener(ev, start, { passive: true }));
+
+  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+  reduceMotion.addEventListener('change', restart);
+
+  // 画面外にある間は動かさない（表示自体には手を触れないので、真っ白事故にはならない）
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      visible = entries[0].isIntersecting;
+      visible ? start() : stop();
+    }, { threshold: 0.2 }).observe(section);
+  } else {
+    start();
+  }
+});
+
+/* =========================================================
+   お知らせ一覧のカテゴリ絞り込み（news.html）
+   JSが動かない環境でも全件そのまま見えるので、機能の有無で情報は欠けない
+   ========================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('archive-grid');
+  const btns = document.querySelectorAll('.news-filter-btn');
+  const emptyMsg = document.getElementById('news-empty-msg');
+  if (!grid || !btns.length) return;
+
+  const cards = Array.from(grid.querySelectorAll('.archive-card'));
+
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.filter;
+
+      btns.forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+
+      let shown = 0;
+      cards.forEach((card) => {
+        const hit = key === 'all' || card.dataset.category === key;
+        card.hidden = !hit;
+        if (hit) shown++;
+      });
+
+      if (emptyMsg) emptyMsg.hidden = shown > 0;
+    });
   });
 });

@@ -32,7 +32,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=5.9">
+  <link rel="stylesheet" href="style.css?v=6.0">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-35CM0R1HLL"></script>
@@ -416,8 +416,8 @@
       </div>
       <div class="news-header-action">
         <a href="news.html" class="news-view-all-link">すべてのお知らせを見る <span aria-hidden="true">→</span></a>
-        <!-- 複数記事がある際に回すカルーセル操作ボタン（初期は単一記事のため非表示） -->
-        <div class="carousel-nav-btns" id="carousel-nav-btns" style="display: none;">
+        <!-- カルーセル操作ボタン（自動送り・ホバーで停止。JS側で制御） -->
+        <div class="carousel-nav-btns" id="carousel-nav-btns">
           <button type="button" class="carousel-btn prev-btn" id="news-prev-btn" aria-label="前のお知らせへ">←</button>
           <button type="button" class="carousel-btn next-btn" id="news-next-btn" aria-label="次のお知らせへ">→</button>
         </div>
@@ -427,26 +427,100 @@
     <!-- ニュースカルーセルトラック（直近最大4件まで横に並んでぐるぐる回る設計） -->
     <div class="news-carousel-container">
       <div class="news-carousel-track" id="news-track">
-        
-        <!-- ニュース1: NICO DXパートナー登録（正式登録記事） -->
+
+        <article class="news-square-card">
+          <div class="news-card-badge-row">
+            <span class="news-card-badge badge-info">お知らせ</span>
+            <time datetime="2026-09-20" class="news-card-date">2026.09.20</time>
+          </div>
+          <div class="news-card-thumb thumb-pattern thumb-info">
+            <span class="thumb-label">NEWS</span>
+            <span class="thumb-title">Privacy Policy</span>
+          </div>
+          <div class="news-card-content">
+            <h3 class="news-card-title">
+              <a href="news/privacy-policy.html">プライバシーポリシーを制定・公開しました</a>
+            </h3>
+            <p class="news-card-desc">
+              2026年9月20日付でプライバシーポリシーを制定しました。取得する情報の利用目的やCookie・アクセス解析の取り扱いを明示しています。全文を公開中です。
+            </p>
+          </div>
+          <div class="news-card-footer">
+            <a href="news/privacy-policy.html" class="news-card-arrow-link">
+              <span>詳細を読む</span>
+              <span class="arrow-icon" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
         <article class="news-square-card">
           <div class="news-card-badge-row">
             <span class="news-card-badge badge-official">公的登録</span>
             <time datetime="2026-09-07" class="news-card-date">2026.09.07</time>
           </div>
           <div class="news-card-thumb">
-            <img src="assets/nico-logo.png" alt="NICOロゴ" class="news-card-img" loading="lazy">
+            <img src="assets/nico-logo.png" alt="公益財団法人にいがた産業創造機構 NICO ロゴ" class="news-card-img" loading="lazy">
           </div>
           <div class="news-card-content">
             <h3 class="news-card-title">
-              <a href="news.html">公益財団法人にいがた産業創造機構（NICO）「新潟県DXパートナー」に登録されました</a>
+              <a href="news/nico-dx-partner.html">公益財団法人にいがた産業創造機構（NICO）「新潟県DXパートナー」に登録されました</a>
             </h3>
             <p class="news-card-desc">
               新潟県内の中小企業・自治体のDX推進を伴走支援するため、NICOが運営するパートナー制度に正式登録されました。
             </p>
           </div>
           <div class="news-card-footer">
-            <a href="news.html" class="news-card-arrow-link">
+            <a href="news/nico-dx-partner.html" class="news-card-arrow-link">
+              <span>詳細を読む</span>
+              <span class="arrow-icon" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="news-square-card">
+          <div class="news-card-badge-row">
+            <span class="news-card-badge badge-info">お知らせ</span>
+            <time datetime="2026-09-07" class="news-card-date">2026.09.07</time>
+          </div>
+          <div class="news-card-thumb thumb-pattern thumb-info">
+            <span class="thumb-label">NEWS</span>
+            <span class="thumb-title">genai-innov.com</span>
+          </div>
+          <div class="news-card-content">
+            <h3 class="news-card-title">
+              <a href="news/domain-genai-innov.html">独自ドメイン genai-innov.com へコーポレートサイトを移行しました</a>
+            </h3>
+            <p class="news-card-desc">
+              2026年9月7日、コーポレートサイトを独自ドメイン genai-innov.com へ移行しました。旧URLからは自動転送され、既存のリンクもそのまま使えます。
+            </p>
+          </div>
+          <div class="news-card-footer">
+            <a href="news/domain-genai-innov.html" class="news-card-arrow-link">
+              <span>詳細を読む</span>
+              <span class="arrow-icon" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="news-square-card">
+          <div class="news-card-badge-row">
+            <span class="news-card-badge badge-service">サービス</span>
+            <time datetime="2026-09-05" class="news-card-date">2026.09.05</time>
+          </div>
+          <div class="news-card-thumb thumb-pattern thumb-service">
+            <span class="thumb-label">SERVICE</span>
+            <span class="thumb-title">AI Advisory</span>
+          </div>
+          <div class="news-card-content">
+            <h3 class="news-card-title">
+              <a href="news/service-launch.html">「AI顧問 / AIコンサルタント」と「生成AIツール導入支援」の提供を開始しました</a>
+            </h3>
+            <p class="news-card-desc">
+              2026年9月5日、月額30,000円のAI顧問と、50,000円／10時間の生成AIツール導入支援の提供を開始しました。判断と定着の両面を支援します。
+            </p>
+          </div>
+          <div class="news-card-footer">
+            <a href="news/service-launch.html" class="news-card-arrow-link">
               <span>詳細を読む</span>
               <span class="arrow-icon" aria-hidden="true">→</span>
             </a>
@@ -519,7 +593,7 @@
         <p class="dx-partner-desc">
           当社は、公益財団法人にいがた産業創造機構（NICO）が運営する「新潟県DXパートナー」の登録事業者です。新潟県内の中小企業・自治体の皆様が抱えるデジタル化・業務改善の課題に対し、現場目線に立った実践的な生成AI導入・研修・自動化を伴走支援いたします。
         </p>
-        <a href="news.html" class="dx-partner-link">登録の詳細・ご提供メニューを見る <span aria-hidden="true">→</span></a>
+        <a href="news/nico-dx-partner.html" class="dx-partner-link">登録の詳細・ご提供メニューを見る <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -562,6 +636,6 @@
     </div>
   </footer>
 
-  <script src="main.js?v=1.3"></script>
+  <script src="main.js?v=2.0"></script>
 </body>
 </html>

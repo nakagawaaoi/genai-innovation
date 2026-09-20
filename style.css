@@ -1589,6 +1589,44 @@ footer {
   color: var(--green-deep);
 }
 
+/* サムネ画像が無い記事は、カテゴリ色の面で代用する。
+   画像を用意しなくても一覧のトーンが揃うようにするため。 */
+.thumb-pattern .thumb-label {
+  opacity: .85;
+}
+
+.thumb-info {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-color: #dbeafe;
+}
+
+.thumb-info .thumb-label { color: #60a5fa; }
+.thumb-info .thumb-title { color: #1e40af; }
+
+.thumb-service {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border-color: #ffedd5;
+}
+
+.thumb-service .thumb-label { color: #fb923c; }
+.thumb-service .thumb-title { color: #c2410c; }
+
+.thumb-corp {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-color: #e2e8f0;
+}
+
+.thumb-corp .thumb-label { color: #94a3b8; }
+.thumb-corp .thumb-title { color: #334155; }
+
+.thumb-official {
+  background: linear-gradient(135deg, var(--paper-green) 0%, #d7efe2 100%);
+  border-color: #d7efe2;
+}
+
+.thumb-official .thumb-label { color: var(--green); }
+.thumb-official .thumb-title { color: var(--green-deep); }
+
 .news-card-content {
   flex: 1;
 }

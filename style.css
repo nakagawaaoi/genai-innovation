@@ -1773,18 +1773,19 @@ footer {
 }
 
 .footer-nav a {
-  color: rgba(255, 255, 255, 0.75);
+  /* フッターは白背景。白文字だと見えないため本文色系に修正（2026-09-20） */
+  color: var(--ink-2);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .footer-nav a:hover {
-  color: #ffffff;
+  color: var(--green-deep);
   text-decoration: underline;
 }
 
 .footer-nav-divider {
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--ink-3);
   font-size: 0.75rem;
 }
 

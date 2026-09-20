@@ -205,32 +205,54 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navBtns) navBtns.style.display = 'none'; // 1枚しかないなら回す意味がない
     return;
   }
-  if (navBtns) navBtns.style.display = 'flex';
-
-  // カード1枚分ずつ送る（幅はCSS側で変わるので毎回測る）
-  const step = () => {
-    const first = track.querySelector('.news-square-card');
-    if (!first) return 300;
-    const gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
-    return first.getBoundingClientRect().width + gap;
-  };
+  const list = Array.from(cards);
   const maxScroll = () => track.scrollWidth - track.clientWidth;
 
+  // カードの左端の位置（scrollLeft に揃う座標）
+  const posOf = (i) => list[i].offsetLeft - list[0].offsetLeft;
+
+  // いま何枚目にいるか（いちばん近いカードで判定）
+  const currentIndex = () => {
+    let best = 0, bestDist = Infinity;
+    list.forEach((_, i) => {
+      const d = Math.abs(posOf(i) - track.scrollLeft);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    return best;
+  };
+
+  // scrollBy で一定量ずつ送ると、右端の「あと少し」で止まれず戻されることがある。
+  // カードの位置を直接指定し、右端を超えないように丸める
+  const goTo = (i) => {
+    const max = maxScroll();
+    const left = Math.max(0, Math.min(posOf(i), max));
+    track.scrollTo({ left, behavior: 'smooth' });
+  };
+
   const next = () => {
+    if (maxScroll() <= 0) return;
     if (track.scrollLeft >= maxScroll() - 10) {
       track.scrollTo({ left: 0, behavior: 'smooth' }); // 端まで来たら先頭へ戻る
     } else {
-      track.scrollBy({ left: step(), behavior: 'smooth' });
+      goTo(Math.min(currentIndex() + 1, list.length - 1));
     }
   };
 
   const prev = () => {
+    if (maxScroll() <= 0) return;
     if (track.scrollLeft <= 10) {
-      track.scrollTo({ left: maxScroll(), behavior: 'smooth' });
+      track.scrollTo({ left: maxScroll(), behavior: 'smooth' }); // 先頭から末尾へ
     } else {
-      track.scrollBy({ left: -step(), behavior: 'smooth' });
+      goTo(Math.max(currentIndex() - 1, 0));
     }
   };
+
+  // 全部が画面に収まっていて送る先が無いなら、ボタンを出さない（押せるのに動かない状態を避ける）
+  const syncBtns = () => {
+    if (navBtns) navBtns.style.display = maxScroll() > 0 ? 'flex' : 'none';
+  };
+  syncBtns();
+  window.addEventListener('resize', syncBtns, { passive: true });
 
   nextBtn.addEventListener('click', () => { next(); restart(); });
   prevBtn.addEventListener('click', () => { prev(); restart(); });

@@ -1463,7 +1463,9 @@ footer {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  /* mandatory にすると、最後の1枚が覗いている位置（＝右端）に
+     スナップ先が無いため、送っても先頭へ引き戻される。proximity にする */
+  scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   padding: 4px 4px 20px;

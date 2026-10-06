@@ -430,10 +430,6 @@
   color: inherit;
 }
 
-/* 一覧では少し大きめのサムネにする（style.css の 85px を上書き） */
-.archive-card .news-card-thumb {
-  height: 110px;
-}
 
 .archive-card-body {
   display: flex;
@@ -624,5 +620,401 @@ a.pager-link:hover .pager-title {
   .pager-index {
     text-align: center;
     order: 3;
+  }
+}
+
+/* =========================================================
+   導入実績（CASE STUDY）記事
+   ========================================================= */
+.case-eyebrow {
+  display: block;
+  font-family: var(--font-en);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+}
+
+.case-subtitle {
+  margin-top: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+/* 写真 */
+.case-photo {
+  position: relative;
+  margin: 0 0 32px;
+}
+
+.case-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.case-photo figcaption {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--ink-3);
+}
+
+/* お客様プロフィール */
+.case-profile {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--green);
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.case-profile-head {
+  padding: 20px 24px 4px;
+}
+
+.case-profile-label {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+}
+
+.case-profile-name {
+  margin-top: 4px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.case-profile-name small {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.case-profile dl {
+  display: grid;
+  grid-template-columns: 7em 1fr;
+  margin: 12px 24px 0;
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+
+.case-profile dt,
+.case-profile dd {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+
+.case-profile dt {
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+.case-profile dd {
+  margin: 0;
+  color: #334155;
+}
+
+.case-profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding: 16px 24px;
+  margin-top: 8px;
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+}
+
+.case-profile-links a {
+  color: var(--green-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.case-profile-links a:hover {
+  text-decoration: underline;
+}
+
+/* 数字の帯（深緑＋波） */
+.case-numbers {
+  position: relative;
+  background: var(--green-deep);
+  border-radius: var(--radius);
+  padding: 32px 28px 28px;
+  margin-bottom: 48px;
+  overflow: hidden;
+  color: #fff;
+}
+
+.case-numbers::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--wave) right -40px bottom -60px / 520px auto no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.case-numbers-title {
+  position: relative;
+  font-family: var(--font-en);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--green);
+  margin-bottom: 18px;
+}
+
+.case-numbers-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.case-number {
+  border-left: 2px solid rgba(255, 255, 255, 0.25);
+  padding-left: 16px;
+}
+
+.case-number-value {
+  display: block;
+  font-family: var(--font-en);
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.case-number-value small {
+  font-family: var(--font-jp);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+.case-number-label {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.case-numbers-note {
+  position: relative;
+  margin-top: 18px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 支援の流れ（タイムライン） */
+.case-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+
+.case-timeline li {
+  position: relative;
+  padding: 0 0 28px 64px;
+}
+
+.case-timeline li::before {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 44px;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+
+.case-timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.case-timeline li:last-child::before {
+  display: none;
+}
+
+.case-step-num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper-green);
+  color: var(--green-deep);
+  font-family: var(--font-en);
+  font-weight: 800;
+  font-size: 1.05rem;
+  border-radius: 50%;
+}
+
+.case-timeline li:last-child .case-step-num {
+  background: var(--green);
+  color: #fff;
+}
+
+.case-timeline h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.5;
+  padding-top: 9px;
+  margin-bottom: 4px;
+}
+
+.case-timeline p {
+  font-size: 0.93rem;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+/* 自動化した業務 */
+.case-tasks {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.case-tasks li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--paper-green);
+  border-radius: var(--radius);
+  font-weight: 700;
+  color: var(--green-deep);
+  line-height: 1.5;
+}
+
+.case-tasks li::before {
+  content: "";
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
+
+/* 受講者の声 */
+.case-voices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.case-voice {
+  position: relative;
+  margin: 0;
+  padding: 44px 22px 20px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.case-voice::before {
+  content: "\201C";
+  position: absolute;
+  top: 2px;
+  left: 18px;
+  font-family: Georgia, serif;
+  font-size: 3.6rem;
+  line-height: 1;
+  color: var(--green);
+}
+
+.case-voice p {
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.8;
+  color: var(--ink);
+  margin: 0;
+}
+
+.case-voice cite {
+  font-style: normal;
+  font-size: 0.82rem;
+  color: var(--ink-3);
+}
+
+@media (max-width: 640px) {
+  .case-numbers {
+    padding: 26px 20px 22px;
+  }
+
+  .case-numbers-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .case-number-value {
+    font-size: 2.2rem;
+  }
+
+  .case-profile dl {
+    grid-template-columns: 5.5em 1fr;
+    margin: 10px 18px 0;
+  }
+
+  .case-profile-head,
+  .case-profile-links {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .case-timeline li {
+    padding-left: 56px;
+  }
+}
+
+.founder-quote .founder-quote-sign {
+  margin-top: 12px;
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+/* 印刷・PDF書き出し用 */
+@media print {
+  header {
+    position: static !important;
+  }
+
+  .case-profile,
+  .case-numbers,
+  .case-timeline li,
+  .case-tasks,
+  .case-voice,
+  .founder-quote,
+  .cta-box,
+  .article-pager {
+    break-inside: avoid;
+  }
+
+  .content-section h2 {
+    break-after: avoid;
   }
 }

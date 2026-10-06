@@ -28,8 +28,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;600;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;600;800;900&display=swap"></noscript>
 
-  <link rel="stylesheet" href="style.css?v=6.4">
-  <link rel="stylesheet" href="news.css?v=2.1">
+  <link rel="stylesheet" href="style.css?v=6.6">
+  <link rel="stylesheet" href="news.css?v=2.7">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-35CM0R1HLL"></script>
@@ -60,13 +60,14 @@
         "mainEntity": {
           "@type": "ItemList",
           "itemListOrder": "https://schema.org/ItemListOrderDescending",
-          "numberOfItems": 5,
+          "numberOfItems": 6,
           "itemListElement": [
-          { "@type": "ListItem", "position": 1, "url": "https://genai-innov.com/news/privacy-policy.html", "name": "プライバシーポリシーを制定・公開しました" },
-          { "@type": "ListItem", "position": 2, "url": "https://genai-innov.com/news/nico-dx-partner.html", "name": "公益財団法人にいがた産業創造機構（NICO）「新潟県DXパートナー」に登録されました" },
-          { "@type": "ListItem", "position": 3, "url": "https://genai-innov.com/news/domain-genai-innov.html", "name": "独自ドメイン genai-innov.com へコーポレートサイトを移行しました" },
-          { "@type": "ListItem", "position": 4, "url": "https://genai-innov.com/news/service-launch.html", "name": "「AI顧問 / AIコンサルタント」と「生成AIツール導入支援」の提供を開始しました" },
-          { "@type": "ListItem", "position": 5, "url": "https://genai-innov.com/news/company-founded.html", "name": "2026年7月15日、生成AIイノベーション合同会社を設立しました" }
+          { "@type": "ListItem", "position": 1, "url": "https://genai-innov.com/news/vertex-ai-training.html", "name": "【導入実績】スパ&ラウンジ長潟（エンジョイ・ライフ・クラブ）様で生成AI導入支援を実施しました" },
+          { "@type": "ListItem", "position": 2, "url": "https://genai-innov.com/news/privacy-policy.html", "name": "プライバシーポリシーを制定・公開しました" },
+          { "@type": "ListItem", "position": 3, "url": "https://genai-innov.com/news/nico-dx-partner.html", "name": "公益財団法人にいがた産業創造機構（NICO）「新潟県DXパートナー」に登録されました" },
+          { "@type": "ListItem", "position": 4, "url": "https://genai-innov.com/news/domain-genai-innov.html", "name": "独自ドメイン genai-innov.com へコーポレートサイトを移行しました" },
+          { "@type": "ListItem", "position": 5, "url": "https://genai-innov.com/news/service-launch.html", "name": "「AI顧問 / AIコンサルタント」と「生成AIツール導入支援」の提供を開始しました" },
+          { "@type": "ListItem", "position": 6, "url": "https://genai-innov.com/news/company-founded.html", "name": "2026年7月15日、生成AIイノベーション合同会社を設立しました" }
           ]
         }
       }
@@ -115,6 +116,7 @@
     <!-- カテゴリ絞り込み -->
     <div class="news-filter" role="group" aria-label="カテゴリで絞り込む">
         <button type="button" class="news-filter-btn is-active" data-filter="all">すべて</button>
+        <button type="button" class="news-filter-btn" data-filter="badge-case">導入実績</button>
         <button type="button" class="news-filter-btn" data-filter="badge-official">公的登録</button>
         <button type="button" class="news-filter-btn" data-filter="badge-service">サービス</button>
         <button type="button" class="news-filter-btn" data-filter="badge-info">お知らせ</button>
@@ -122,6 +124,20 @@
     </div>
 
     <div class="archive-grid" id="archive-grid">
+        <article class="archive-card" data-category="badge-case">
+          <a href="news/vertex-ai-training.html" class="archive-card-link">
+            <div class="news-card-thumb thumb-photo"><img src="assets/case-vertex-640.jpg" alt="スパ&amp;ラウンジ長潟様での導入支援の記念写真" class="news-card-img" width="320" height="180" loading="lazy"></div>
+            <div class="archive-card-body">
+              <div class="archive-card-meta">
+                <span class="news-card-badge badge-case">導入実績</span>
+                <time datetime="2026-10-06" class="news-card-date">2026.10.06</time>
+              </div>
+              <h2 class="archive-card-title">【導入実績】スパ&amp;ラウンジ長潟（エンジョイ・ライフ・クラブ）様で生成AI導入支援を実施しました</h2>
+              <p class="archive-card-excerpt">新潟市中央区の「スパ&amp;ラウンジ長潟」などを運営するエンジョイ・ライフ・クラブ様で、全5回・計10時間の導入支援を実施。シフト表作成や売上報告の入力を受講者ご自身で自動化し、回答者全員が満足度5点満点でした。</p>
+              <span class="archive-card-more">詳細を読む <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </article>
         <article class="archive-card" data-category="badge-info">
           <a href="news/privacy-policy.html" class="archive-card-link">
             <div class="news-card-thumb thumb-pattern thumb-info">

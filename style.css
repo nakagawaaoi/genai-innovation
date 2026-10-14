@@ -1878,3 +1878,25 @@ footer {
     gap: 8px 12px;
   }
 }
+
+/* =========================================
+   紹介動画（トップの hero 直後。2026-10-14 追加）
+   見出しと動画をそろえて最大960pxで中央に置く（見出しの左端＝動画の左端）
+   ========================================= */
+.movie-section {
+  padding-bottom: 0; /* 直後の「理念」セクションの上余白と二重にならないように */
+}
+
+.movie-section > * {
+  max-width: 960px;
+}
+
+.movie-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}

@@ -965,3 +965,25 @@ ol.sort-list li::before {
   width: 1.4em;
 }
 .service-more[open] > summary::before { content: '－'; }
+/* 開いているときは summary を「閉じる」に。下までスクロールした人用に、末尾にも閉じるボタン（2026-10-14） */
+.service-more > summary { scroll-margin-top: 96px; }
+.service-more-label-open { display: none; }
+.service-more[open] .service-more-label-closed { display: none; }
+.service-more[open] .service-more-label-open { display: inline; }
+.service-more-close {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin-top: var(--sp-2);
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid var(--green);
+  border-radius: var(--radius);
+  color: var(--green-dark);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.service-more-close:hover { border-color: var(--green-dark); background: rgba(0, 195, 98, 0.06); }
+.service-more-close:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 2px; }

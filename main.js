@@ -330,3 +330,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// 「くわしく見る」（details.service-more）の末尾にある「閉じる」ボタン
+// 閉じたあと、summary が固定ヘッダーに隠れない位置（scroll-margin-top）まで戻す
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.service-more-close');
+  if (!btn) return;
+  const details = btn.closest('details');
+  if (!details) return;
+  details.open = false;
+  const summary = details.querySelector('summary');
+  if (summary) {
+    summary.scrollIntoView({ block: 'start' });
+    summary.focus({ preventScroll: true });
+  }
+});

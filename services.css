@@ -613,6 +613,24 @@
   font-weight: 700;
 }
 
+/* ※1 交通費・出張費の箇条 */
+.price-common-points {
+  margin: 0;
+  padding-left: 1.2em;
+  list-style: disc;
+}
+
+.price-common-points ul {
+  margin: 2px 0 0;
+  padding-left: 1.2em;
+  list-style: circle;
+}
+
+/* 金額（例：1,000円）が数字と「円」の間で折れないように */
+.price-common-points strong {
+  white-space: nowrap;
+}
+
 @media (max-width: 640px) {
   .price-common-box {
     padding: var(--sp-2, 16px);

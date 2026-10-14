@@ -926,3 +926,24 @@ ol.sort-list li::before {
 @media (max-width: 560px) {
   .compare-section { padding: var(--sp-4) var(--sp-2); }
 }
+
+/* 導入支援の「くわしく見る」（2026-10-14 追加）。JSなしで開閉する details を使う */
+.service-more {
+  margin-bottom: var(--sp-2);
+  border-top: 1px solid var(--line);
+}
+.service-more > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+.service-more > summary::-webkit-details-marker { display: none; }
+.service-more > summary::before {
+  content: '＋';
+  display: inline-block;
+  width: 1.4em;
+}
+.service-more[open] > summary::before { content: '－'; }

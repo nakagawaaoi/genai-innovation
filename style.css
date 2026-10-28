@@ -1903,3 +1903,45 @@ footer {
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
+
+/* ================================================================
+   よくあるご質問（トップ #faq）
+   ================================================================ */
+.faq-top {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.faq-top .faq-item {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.faq-top dt,
+.faq-top summary {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  line-height: 1.6;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-right: 32px;
+}
+.faq-top summary::-webkit-details-marker { display: none; }
+.faq-top summary::before { content: 'Q. '; }
+.faq-top summary::after {
+  content: '+';
+  position: absolute;
+  right: 4px;
+  top: 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+.faq-top details[open] summary::after { content: '−'; }
+.faq-top dd,
+.faq-top details p {
+  margin: 10px 0 0;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+  line-height: 1.9;
+}

@@ -14,9 +14,15 @@
   </url>
   <url>
     <loc>https://genai-innov.com/news.html</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://genai-innov.com/news/niigata-u-venture.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://genai-innov.com/news/vertex-ai-training.html</loc>

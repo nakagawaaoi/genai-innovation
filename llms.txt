@@ -1,6 +1,6 @@
 # 生成ＡＩイノベーション合同会社（GenAI Innovation LLC）
 
-> 新潟県新潟市を拠点に、公的機関・法人・個人へ生成AIの研修・AI顧問・ツール導入支援・AX（AIトランスフォーメーション）コンサルティング・共同研究を提供する会社です。2026年7月15日設立。代表社員は中川 碧偉。公益財団法人にいがた産業創造機構（NICO）の「新潟県DXパートナー」登録事業者です。
+> 新潟県新潟市を拠点に、公的機関・法人・個人へ生成AIの研修・AI顧問・ツール導入支援・AX（AIトランスフォーメーション）コンサルティング・共同研究を提供する会社です。2026年7月15日設立。代表社員は中川 碧偉。「新潟大学発ベンチャー」（第15号）認定企業、公益財団法人にいがた産業創造機構（NICO）の「新潟県DXパートナー」登録事業者です。
 
 - 商号：生成ＡＩイノベーション合同会社（表記ゆれ：生成AIイノベーション合同会社）
 - 本店所在地：新潟県新潟市江南区
@@ -25,12 +25,14 @@
 - [トップページ](https://genai-innov.com/)：理念・事業内容・できること・会社概要
 - [事業内容・料金プラン](https://genai-innov.com/services.html)：各サービスの内容と料金、AI顧問と導入支援の違い、AIに渡しやすい仕事の見分け方
 - [お知らせ](https://genai-innov.com/news.html)：導入実績・公的登録などの最新情報
+- [新潟大学発ベンチャー認定](https://genai-innov.com/news/niigata-u-venture.html)
 - [新潟県DXパートナー登録](https://genai-innov.com/news/nico-dx-partner.html)
 - [採用情報](https://genai-innov.com/recruit/)
 - [プライバシーポリシー](https://genai-innov.com/privacy.html)
 
 ## 外部の参照先
 
+- [新潟大学 社会連携推進機構 大学発ベンチャー紹介ページ](https://www.ircp.niigata-u.ac.jp/collaboration/venture/detail_ai/)
 - [NICO 新潟県DXパートナー 掲載ページ](https://www.nico.or.jp/mokuteki/it/88669/)
 - [gBizINFO 法人情報](https://info.gbiz.go.jp/hojin/ichiran?hojinBango=2110003006238)
 - [Instagram](https://www.instagram.com/aoi_.7512/)

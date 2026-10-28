@@ -1950,3 +1950,10 @@ footer {
   color: var(--ink-2);
   line-height: 1.9;
 }
+
+/* 最終更新日（AI・検索向けに鮮度を示す） */
+.page-updated {
+  margin: 8px 0 0;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}

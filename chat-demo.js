@@ -30,6 +30,34 @@
   let turns = 0, returnFocus = launcher, composing = false, compositionEnding = false;
   const input = $('#chat-input'), log = $('.chat-messages'), status = $('.chat-status');
   const challenge=new window.CompanyChallenge($('.chat-bot-check'));
+  const viewport=window.visualViewport;
+  const isMobile=()=>window.innerWidth<=600;
+  let viewportBaseline=0, viewportWidth=0;
+  function clearViewport(){
+    panel.style.removeProperty('--chat-visible-height');panel.style.removeProperty('--chat-visible-top');
+    panel.removeAttribute('data-keyboard-open');
+  }
+  function syncViewport(){
+    if(!panel.open||!viewport)return;
+    if(!isMobile()){clearViewport();return;}
+    // ピンチ拡大中は可視領域へ縮め直さず、利用者の拡大・移動を保ちます。
+    if(viewport.scale&&Math.abs(viewport.scale-1)>.01)return;
+    if(viewportWidth!==window.innerWidth){viewportWidth=window.innerWidth;viewportBaseline=Math.max(viewport.height,window.innerHeight||0);}
+    if(document.activeElement!==input&&!panel.hasAttribute('data-keyboard-open'))viewportBaseline=viewport.height;
+    panel.style.setProperty('--chat-visible-height',viewport.height+'px');
+    panel.style.setProperty('--chat-visible-top',Math.max(0,viewport.offsetTop)+'px');
+    if(viewportBaseline-viewport.height>120)panel.setAttribute('data-keyboard-open','');
+    else panel.removeAttribute('data-keyboard-open');
+  }
+  function watchViewport(){
+    if(viewport){viewport.addEventListener('resize',syncViewport);viewport.addEventListener('scroll',syncViewport);}
+    window.addEventListener?.('resize',syncViewport);
+  }
+  function unwatchViewport(){
+    if(viewport){viewport.removeEventListener('resize',syncViewport);viewport.removeEventListener('scroll',syncViewport);}
+    window.removeEventListener?.('resize',syncViewport);if(viewport)clearViewport();
+  }
+  input.addEventListener('focus',syncViewport);input.addEventListener('blur',syncViewport);
   function showStatus(text) { status.textContent = text; status.hidden = !text; }
   function addMessage(role, text, sources = [], mode = 'api') {
     const bubble = document.createElement('div');
@@ -44,12 +72,16 @@
     returnFocus = event.currentTarget || launcher;
     panel.showModal();
     document.body.style.overflow = 'hidden';
-    input.focus();
+    viewportBaseline=viewport?.height||0;
+    viewportWidth=window.innerWidth;
+    watchViewport();
+    syncViewport();
+    (isMobile()?$('.chat-close'):input).focus({preventScroll:true});
   }
   function close() { panel.close(); }
   launcher.addEventListener('click', open);
   $('.chat-close').addEventListener('click', close);
-  panel.addEventListener('close', () => { document.body.style.overflow = ''; returnFocus.focus(); });
+  panel.addEventListener('close', () => { unwatchViewport();document.body.style.overflow = ''; returnFocus.focus({preventScroll:true}); });
   function updateCount(force=false) { $('.chat-count').textContent=input.value.length+' / 800文字';$('.chat-count').hidden=!force&&input.value.length<720; }
   function setBusy(value){
     busy=value;input.readOnly=value;$('.chat-send').disabled=value||!connectionReady;
@@ -109,7 +141,7 @@
       if(error.code==='not_configured'||error.code==='upstream_auth'){connectionReady=false;$('.chat-api-state').textContent='APIの設定確認が必要です';}
     }finally{
       clearTimeout(timer);
-      if(epoch===generation){activeRequest=null;setBusy(false);input.focus();}
+      if(epoch===generation){activeRequest=null;setBusy(false);if(!isMobile())input.focus({preventScroll:true});}
     }
   }
   $('.chat-form').addEventListener('submit', e => {e.preventDefault();send(input.value);});

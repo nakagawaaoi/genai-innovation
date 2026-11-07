@@ -1778,6 +1778,23 @@ footer {
   object-fit: contain;
 }
 
+/* 2枚目以降のカードは間隔を詰める */
+.dx-partner-card + .dx-partner-card {
+  margin-top: 24px;
+}
+
+/* 新潟大学発ベンチャーカード：写真は枠いっぱいに表示 */
+.venture-photo-area {
+  padding: 0;
+  overflow: hidden;
+}
+
+.venture-photo {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
 .dx-partner-content {
   flex: 1;
   min-width: 0;

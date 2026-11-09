@@ -25,6 +25,7 @@
 - [トップページ](https://genai-innov.com/)：理念・事業内容・できること・会社概要
 - [事業内容・料金プラン](https://genai-innov.com/services.html)：各サービスの内容と料金、AI顧問と導入支援の違い、AIに渡しやすい仕事の見分け方
 - [お知らせ](https://genai-innov.com/news.html)：導入実績・公的登録などの最新情報
+- [導入実績：生成AI導入支援の事例](https://genai-innov.com/news/vertex-ai-training.html)
 - [新潟大学発ベンチャー認定](https://genai-innov.com/news/niigata-u-venture.html)
 - [新潟県DXパートナー登録](https://genai-innov.com/news/nico-dx-partner.html)
 - [採用情報](https://genai-innov.com/recruit/)

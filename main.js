@@ -345,3 +345,17 @@ document.addEventListener('click', (e) => {
     summary.focus({ preventScroll: true });
   }
 });
+
+// 問い合わせフォーム（Googleフォーム）へのクリックを GA4 のキーイベント generate_lead として記録する
+document.addEventListener('click', (e) => {
+  const link = e.target.closest && e.target.closest('a[href*="docs.google.com/forms"]');
+  if (!link || typeof window.gtag !== 'function') return;
+  const where = link.closest('.chat-panel') ? 'chat'
+    : link.closest('header, nav') ? 'header'
+    : link.closest('footer') ? 'footer' : 'body';
+  window.gtag('event', 'generate_lead', {
+    lead_source: 'contact_form',
+    link_location: where,
+    link_text: (link.textContent || '').trim().slice(0, 50)
+  });
+}, true);

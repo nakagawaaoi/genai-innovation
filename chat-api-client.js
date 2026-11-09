@@ -3,7 +3,7 @@
   'use strict';
   const API_ORIGIN='https://genai-contact-api-20261104.sprylion33.chatgpt.site';
   const SOURCES=Object.freeze(Object.fromEntries(Object.entries({
-    services:{url:'/services.html',label:'サービス・料金'},training:{url:'/services.html#service-1',label:'研修'},
+    services:{url:'/services.html',label:'サービス・料金'},training:{url:'/training.html',label:'研修'},
     advisor:{url:'/services.html#service-2',label:'AI顧問'},support:{url:'/services.html#service-3',label:'導入支援'},
     ax:{url:'/services.html#service-4',label:'AXコンサルティング'},fde:{url:'/services.html#service-5',label:'FDE'},
     implementation:{url:'/services.html#service-6',label:'IT・AIソリューション実装'},research:{url:'/services.html#service-7',label:'研究開発・共同研究'},
@@ -20,7 +20,7 @@
   }
   function cleanAnswer(data){
     if(!isRecord(data) || !['api','local'].includes(data.mode) || typeof data.answer!=='string' || !data.answer.trim() || data.answer.length>2000 || typeof data.session_id!=='string' || !SESSION_ID.test(data.session_id) || !Array.isArray(data.source_ids) || data.source_ids.length>5 || data.source_ids.some(id=>typeof id!=='string'||!Object.hasOwn(SOURCES,id)) || new Set(data.source_ids).size!==data.source_ids.length || !ACTIONS.has(data.next_action) || (Object.hasOwn(data,'used_count')&&(!Number.isInteger(data.used_count)||data.used_count<1||data.used_count>8)))throw failure('invalid_response');
-    return {answer:data.answer,mode:data.mode,sessionId:data.session_id,nextAction:data.next_action,sources:data.source_ids.map(id=>SOURCES[id]),usedCount:data.used_count};
+    return {answer:data.answer,mode:data.mode,sessionId:data.session_id,nextAction:data.next_action,sources:data.source_ids.map(id=>SOURCES[id]),sourceIds:data.source_ids.slice(),usedCount:data.used_count};
   }
   class Client{
     constructor(transport){this.transport=transport;this.status=null;this.sessionId=null;}

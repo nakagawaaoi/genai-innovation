@@ -58,6 +58,8 @@
     window.removeEventListener?.('resize',syncViewport);if(viewport)clearViewport();
   }
   input.addEventListener('focus',syncViewport);input.addEventListener('blur',syncViewport);
+  // GA4 への記録。質問・回答の本文は送らない（プライバシーポリシーどおり）。送るのは回数と話題の種類だけ
+  function track(name, params = {}) { try { if (typeof window.gtag === 'function') window.gtag('event', name, params); } catch {} }
   function showStatus(text) { status.textContent = text; status.hidden = !text; }
   function addMessage(role, text, sources = [], mode = 'api') {
     const bubble = document.createElement('div');
@@ -71,6 +73,7 @@
   function open(event) {
     returnFocus = event.currentTarget || launcher;
     panel.showModal();
+    track('chat_open');
     document.body.style.overflow = 'hidden';
     viewportBaseline=viewport?.height||0;
     viewportWidth=window.innerWidth;
@@ -110,7 +113,7 @@
     }
     clearTimeout(timer);checking=false;setBusy(false);
   }
-  async function send(raw) {
+  async function send(raw, entry = 'typed') {
     if(busy)return;
     const message=String(raw).trim();
     if(!message){showStatus('相談したいことを入力するか、候補のボタンを選んでください。');input.focus();return;}
@@ -131,6 +134,7 @@
       if(answer.usedCount!==undefined)turns=answer.usedCount;
       $('.chat-test-controls').hidden=true;
       addMessage('user',message);addMessage('assistant',answer.answer,answer.sources,answer.mode);
+      track('chat_message',{chat_topics:(answer.sourceIds||[]).join(',')||'none',chat_next_action:answer.nextAction||'',chat_entry:entry,chat_turn:turns});
       input.value='';updateCount();
       showStatus('');
       if(turns>=MAX_TURNS)showStatus('この会話は8回までです。「担当者に相談する」からお問い合わせください。');
@@ -149,7 +153,7 @@
   input.addEventListener('compositionstart',()=>{composing=true;compositionEnding=false;});
   input.addEventListener('compositionend',()=>{composing=false;compositionEnding=true;setTimeout(()=>compositionEnding=false,0);});
   input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing&&!composing&&!compositionEnding&&e.keyCode!==229&&e.which!==229){e.preventDefault();send(input.value);}});
-  $('.chat-quick').addEventListener('click',e=>{const b=e.target.closest('[data-prompt]');if(b)send(b.dataset.prompt);});
+  $('.chat-quick').addEventListener('click',e=>{const b=e.target.closest('[data-prompt]');if(b)send(b.dataset.prompt,'quick_'+b.textContent.trim());});
   $('.chat-refresh').addEventListener('click',checkConnection);
   function greet(){addMessage('assistant','当社のサービスや料金をご案内します。知りたいことを入力してください。',[],'local');}
   $('.chat-reset').addEventListener('click',()=>{

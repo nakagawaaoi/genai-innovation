@@ -10,7 +10,7 @@
 
 ## サービスと料金の目安（AIツール利用料は別。新潟市外への訪問は交通費・出張費が別途）
 
-- [生成AI研修・セミナー](https://genai-innov.com/services.html)：20,000円〜／1時間。公的機関・企業・個人向け。オンライン可
+- [生成AI研修・セミナー](https://genai-innov.com/training.html)：20,000円〜／1時間（税込）。経営者・企業・大学・自治体向け。人数の上限なし。オンライン可。テーマは生成AIの仕組み・AIエージェント・DX/AX・業種別の活用・安全な使い方・AIの未来など
 - [AI顧問 / AIコンサルタント](https://genai-innov.com/services.html)：月30,000円（12か月一括は300,000円）。初月は60分×2回、2か月目以降は毎月1回60分の定例。助言のみで作業は含まない。最低契約期間なし
 - [生成AIツール導入支援](https://genai-innov.com/services.html)：125,000円〜。ツール選定・法人アカウント開設・初期設定・社内利用ルール整備・対面の伴走レクチャー（同時6名まで）を一式。目安2〜3か月。最低契約期間なし
 - [AXコンサルティング](https://genai-innov.com/services.html)：200,000円〜／月。現場訪問と業務改革のロードマップ策定
@@ -23,6 +23,7 @@
 ## 主なページ
 
 - [トップページ](https://genai-innov.com/)：理念・事業内容・できること・会社概要
+- [生成AI研修・セミナー](https://genai-innov.com/training.html)：お話しできるテーマ・料金・申し込みの流れ
 - [事業内容・料金プラン](https://genai-innov.com/services.html)：各サービスの内容と料金、AI顧問と導入支援の違い、AIに渡しやすい仕事の見分け方
 - [お知らせ](https://genai-innov.com/news.html)：導入実績・公的登録などの最新情報
 - [導入実績：生成AI導入支援の事例](https://genai-innov.com/news/vertex-ai-training.html)

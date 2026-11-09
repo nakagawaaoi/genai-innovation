@@ -237,6 +237,18 @@ nav a:hover {
   color: #fff;
 }
 
+/* お問い合わせ（Googleフォーム）のボタンだけオレンジ。サイト全体の唯一の差し色（2026-11-09 あおいさん決定） */
+.btn-primary[href*="docs.google.com/forms"] {
+  background-color: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+.btn-primary[href*="docs.google.com/forms"]:hover {
+  background-color: #e85a26;
+  border-color: #e85a26;
+  color: #fff;
+}
+
 .btn-secondary {
   background-color: transparent;
   border-color: var(--ink);

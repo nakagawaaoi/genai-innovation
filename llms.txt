@@ -18,7 +18,7 @@
 - [IT・AIソリューション実装](https://genai-innov.com/services.html)：300,000円〜／1件。社内専用チャットAI、業務自動化、ホームページ制作など
 - [研究開発・共同研究](https://genai-innov.com/services.html)：要相談
 
-対応ツール：ChatGPT、Claude、Gemini、Microsoft Copilot、Claude Code、Codex、Antigravity、NotebookLM、Notion、Canva、Figma、Google Workspace、Microsoft 365 など。
+対応ツール：ChatGPT、Claude、Gemini、Microsoft Copilot、Muse Spark、Claude Code、Codex、Antigravity、NotebookLM、Notion、Canva、Figma、Google Workspace、Microsoft 365 など。
 
 ## 主なページ
 

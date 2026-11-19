@@ -4,7 +4,7 @@
   const API_ORIGIN='https://genai-contact-api-20261104.sprylion33.chatgpt.site';
   const SOURCES=Object.freeze(Object.fromEntries(Object.entries({
     services:{url:'/ai-services.html',label:'サービス・料金'},training:{url:'/training.html',label:'研修'},
-    advisor:{url:'/ai-services.html#service-2',label:'AI顧問'},support:{url:'/ai-services.html#service-3',label:'導入支援'},
+    advisor:{url:'/ai-advisor.html',label:'AI顧問'},support:{url:'/ai-consulting.html',label:'導入支援'},
     ax:{url:'/ai-services.html#service-4',label:'AXコンサルティング'},fde:{url:'/ai-services.html#service-5',label:'FDE'},
     implementation:{url:'/ai-services.html#service-6',label:'IT・AIソリューション実装'},research:{url:'/ai-services.html#service-7',label:'研究開発・共同研究'},
     compare:{url:'/ai-services.html#compare',label:'サービスの比較'},price:{url:'/ai-services.html#price-common',label:'料金の共通事項'},

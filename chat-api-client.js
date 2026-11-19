@@ -3,11 +3,11 @@
   'use strict';
   const API_ORIGIN='https://genai-contact-api-20261104.sprylion33.chatgpt.site';
   const SOURCES=Object.freeze(Object.fromEntries(Object.entries({
-    services:{url:'/services.html',label:'サービス・料金'},training:{url:'/training.html',label:'研修'},
-    advisor:{url:'/services.html#service-2',label:'AI顧問'},support:{url:'/services.html#service-3',label:'導入支援'},
-    ax:{url:'/services.html#service-4',label:'AXコンサルティング'},fde:{url:'/services.html#service-5',label:'FDE'},
-    implementation:{url:'/services.html#service-6',label:'IT・AIソリューション実装'},research:{url:'/services.html#service-7',label:'研究開発・共同研究'},
-    compare:{url:'/services.html#compare',label:'サービスの比較'},price:{url:'/services.html#price-common',label:'料金の共通事項'},
+    services:{url:'/ai-services.html',label:'サービス・料金'},training:{url:'/training.html',label:'研修'},
+    advisor:{url:'/ai-services.html#service-2',label:'AI顧問'},support:{url:'/ai-services.html#service-3',label:'導入支援'},
+    ax:{url:'/ai-services.html#service-4',label:'AXコンサルティング'},fde:{url:'/ai-services.html#service-5',label:'FDE'},
+    implementation:{url:'/ai-services.html#service-6',label:'IT・AIソリューション実装'},research:{url:'/ai-services.html#service-7',label:'研究開発・共同研究'},
+    compare:{url:'/ai-services.html#compare',label:'サービスの比較'},price:{url:'/ai-services.html#price-common',label:'料金の共通事項'},
     company:{url:'/#company',label:'会社について'},contact:{url:'/#contact',label:'お問い合わせ'}
   }).map(([id,source])=>[id,Object.freeze(source)])));
   const ERRORS=Object.freeze({bot_verification:'接続の確認ができませんでした。もう一度お試しください。',storage_error:'利用上限を安全に確認できないため停止しています。',not_configured:'チャットの準備ができていません。接続設定をご確認ください。',invalid_input:'入力内容を確認してください。1回800文字まで送信できます。',session_limit:'この会話は8回までです。「担当者に相談する」または「最初から」をご利用ください。',rate_limit:'短時間の送信が多いため少し待ってからお試しください。',budget_exhausted:'利用上限に達したため停止しています。「担当者に相談する」からお問い合わせください。',upstream_auth:'接続を確認できません。接続設定をご確認ください。',upstream_limit:'AIの利用枠または送信上限に達しました。時間をおいて再度お試しください。',upstream_error:'回答を受け取れませんでした。入力は残しています。時間をおいて再度お試しください。',timeout:'回答に時間がかかりすぎたため中断しました。入力は残しています。再度お試しください。',invalid_response:'回答を安全に表示できませんでした。入力は残しています。再度お試しください。',forbidden:'接続の確認が必要です。「再接続」を押してからお試しください。'});

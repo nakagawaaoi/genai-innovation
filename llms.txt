@@ -11,11 +11,11 @@
 ## サービスと料金の目安（AIツール利用料は別。新潟市外への訪問は交通費・出張費が別途）
 
 - [生成AI研修・セミナー](https://genai-innov.com/training.html)：20,000円〜／1時間（税込）。経営者・企業・大学・自治体向け。人数の上限なし。オンライン可。テーマは生成AIの仕組み・AIエージェント・DX/AX・業種別の活用・安全な使い方・AIの未来など
-- [AI顧問 / AIコンサルタント](https://genai-innov.com/ai-advisor.html)：月30,000円（12か月一括は300,000円）。初月は60分×2回、2か月目以降は毎月1回60分の定例。助言のみで作業は含まない。最低契約期間なし
-- [生成AIツール導入支援](https://genai-innov.com/ai-consulting.html)：125,000円〜。ツール選定・法人アカウント開設・初期設定・社内利用ルール整備・対面の伴走レクチャー（同時6名まで）を一式。目安2〜3か月。最低契約期間なし
-- [AXコンサルティング](https://genai-innov.com/ai-services.html)：200,000円〜／月。現場訪問と業務改革のロードマップ策定
-- [フォワードデプロイドエンジニア（FDE）](https://genai-innov.com/ai-services.html)：200,000円〜／月（週1日稼働の目安）
-- [IT・AIソリューション実装](https://genai-innov.com/ai-services.html)：300,000円〜／1件。社内専用チャットAI、業務自動化、ホームページ制作など
+- [AI顧問 / AIコンサルタント](https://genai-innov.com/ai-advisor.html)：月30,000円（税込、12か月一括は300,000円）。初月は60分×2回、2か月目以降は毎月1回60分の定例。助言のみで作業は含まない。最低契約期間なし
+- [生成AIツール導入支援](https://genai-innov.com/ai-consulting.html)：125,000円〜（税込）。ツール選定・法人アカウント開設・初期設定・社内利用ルール整備・対面の伴走レクチャー（同時6名まで）を一式。目安2〜3か月。最低契約期間なし
+- [AXコンサルティング](https://genai-innov.com/ai-services.html)：200,000円〜／月（税込）。現場訪問と業務改革のロードマップ策定
+- [フォワードデプロイドエンジニア（FDE）](https://genai-innov.com/ai-services.html)：200,000円〜／月（税込。週1日稼働の目安）
+- [IT・AIソリューション実装](https://genai-innov.com/ai-services.html)：300,000円〜／1件（税込）。社内専用チャットAI、業務自動化、ホームページ制作など
 - [研究開発・共同研究](https://genai-innov.com/ai-services.html)：要相談
 
 対応ツール：ChatGPT、Claude、Gemini、Microsoft Copilot、Muse Spark、Claude Code、Codex、Antigravity、NotebookLM、Notion、Canva、Figma、Google Workspace、Microsoft 365 など。
